@@ -13,6 +13,7 @@
 		114E805A279DD30B00C66CD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 114E8058279DD30B00C66CD4 /* Main.storyboard */; };
 		114E805C279DD30C00C66CD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 114E805B279DD30C00C66CD4 /* Assets.xcassets */; };
 		114E805F279DD30C00C66CD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 114E805D279DD30C00C66CD4 /* LaunchScreen.storyboard */; };
+		114E8067279DD6C000C66CD4 /* UIView + Constraints.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8066279DD6C000C66CD4 /* UIView + Constraints.swift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		114E805B279DD30C00C66CD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		114E805E279DD30C00C66CD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		114E8060279DD30C00C66CD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		114E8066279DD6C000C66CD4 /* UIView + Constraints.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Constraints.swift.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,8 @@
 		114E8051279DD30B00C66CD4 /* myWeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				114E8068279DDB5D00C66CD4 /* Extensions */,
+				114E8069279DDFF000C66CD4 /* Models */,
 				114E8052279DD30B00C66CD4 /* AppDelegate.swift */,
 				114E8054279DD30B00C66CD4 /* SceneDelegate.swift */,
 				114E8056279DD30B00C66CD4 /* ViewController.swift */,
@@ -65,6 +69,21 @@
 				114E8060279DD30C00C66CD4 /* Info.plist */,
 			);
 			path = myWeatherApp;
+			sourceTree = "<group>";
+		};
+		114E8068279DDB5D00C66CD4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				114E8066279DD6C000C66CD4 /* UIView + Constraints.swift.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		114E8069279DDFF000C66CD4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				114E8067279DD6C000C66CD4 /* UIView + Constraints.swift.swift in Sources */,
 				114E8057279DD30B00C66CD4 /* ViewController.swift in Sources */,
 				114E8053279DD30B00C66CD4 /* AppDelegate.swift in Sources */,
 				114E8055279DD30B00C66CD4 /* SceneDelegate.swift in Sources */,
