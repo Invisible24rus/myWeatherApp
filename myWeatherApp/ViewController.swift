@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
 //    private let weatherSearchController = UISearchController(searchResultsController: nil)
-
+    private let collectionView = UICollectionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
