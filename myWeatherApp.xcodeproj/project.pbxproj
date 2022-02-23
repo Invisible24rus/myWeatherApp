@@ -14,6 +14,7 @@
 		114E805C279DD30C00C66CD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 114E805B279DD30C00C66CD4 /* Assets.xcassets */; };
 		114E805F279DD30C00C66CD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 114E805D279DD30C00C66CD4 /* LaunchScreen.storyboard */; };
 		114E8067279DD6C000C66CD4 /* UIView + Constraints.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8066279DD6C000C66CD4 /* UIView + Constraints.swift.swift */; };
+		116DA16A27C6A98600D276B2 /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116DA16927C6A98600D276B2 /* CityCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		114E805E279DD30C00C66CD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		114E8060279DD30C00C66CD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		114E8066279DD6C000C66CD4 /* UIView + Constraints.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Constraints.swift.swift"; sourceTree = "<group>"; };
+		116DA16927C6A98600D276B2 /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				114E805B279DD30C00C66CD4 /* Assets.xcassets */,
 				114E805D279DD30C00C66CD4 /* LaunchScreen.storyboard */,
 				114E8060279DD30C00C66CD4 /* Info.plist */,
+				116DA16927C6A98600D276B2 /* CityCollectionViewCell.swift */,
 			);
 			path = myWeatherApp;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				116DA16A27C6A98600D276B2 /* CityCollectionViewCell.swift in Sources */,
 				114E8067279DD6C000C66CD4 /* UIView + Constraints.swift.swift in Sources */,
 				114E8057279DD30B00C66CD4 /* ViewController.swift in Sources */,
 				114E8053279DD30B00C66CD4 /* AppDelegate.swift in Sources */,
