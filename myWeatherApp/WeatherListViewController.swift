@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class WeatherListViewController: UIViewController {
+    
+    private let networkService = NetworkService()
+    private let citiesDefaultArray = ["Москва", "Питер"]
+    private let city = "Москва"
     
 //    private let weatherSearchController = UISearchController(searchResultsController: nil)
     private var collectionView: UICollectionView = {
@@ -16,7 +20,7 @@ class ViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 50, bottom: 50, right: 50)
         layout.minimumLineSpacing = 50
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .gray
+        collectionView.backgroundColor = .systemGray5
         collectionView.register(CityCollectionViewCell.self, forCellWithReuseIdentifier: CityCollectionViewCell.identifier)
         return collectionView
     }()
@@ -29,15 +33,13 @@ class ViewController: UIViewController {
         
     }
 
-
 }
 
 //MARK: - Private
 
-private extension ViewController {
+private extension WeatherListViewController {
     
     func setupViews() {
-        
         view.addSubview(collectionView)
         view.bindSubviewsToBoundsView(collectionView)
 //        title = "Список городов"
@@ -64,14 +66,15 @@ private extension ViewController {
 
 //MARK: - UICollectionViewDelegate
 
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension WeatherListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
         
         let itemsPerRow = 1
         let itemWidth = (collectionView.frame.width - layout.sectionInset.left - layout.sectionInset.right) / CGFloat(itemsPerRow)
-        return CGSize(width: itemWidth, height: 200)
+        let itemHeight = itemWidth - 100
+        return CGSize(width: itemWidth, height: itemHeight)
     }
 
 }
@@ -79,10 +82,10 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
 //MARK: - UICollectionViewDataSource
 
-extension ViewController: UICollectionViewDataSource {
+extension WeatherListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        citiesDefaultArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

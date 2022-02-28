@@ -11,7 +11,7 @@ class CityCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CityCollectionViewCell"
     
-    private let weatherInfoLabel: UILabel = {
+    private var weatherPropertiesLabel: UILabel = {
         let label = UILabel()
         label.text = "Snow"
         label.textColor = .gray
@@ -19,7 +19,7 @@ class CityCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let temperatueInfoLabel: UILabel = {
+    private var temperatueInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "34°"
         label.textColor = .black
@@ -27,7 +27,7 @@ class CityCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let cityInfoLabel: UILabel = {
+    private var cityInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "New York"
         label.textColor = .black
@@ -47,21 +47,17 @@ class CityCollectionViewCell: UICollectionViewCell {
     }
     
     func setConstraints() {
-        contentView.addSubviewsForAutoLayout([weatherInfoLabel, temperatueInfoLabel, cityInfoLabel])
+        contentView.addSubviewsForAutoLayout([weatherPropertiesLabel, temperatueInfoLabel, cityInfoLabel])
         
         NSLayoutConstraint.activate([
-            weatherInfoLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            weatherInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            weatherPropertiesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            weatherPropertiesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             temperatueInfoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             temperatueInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             cityInfoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             cityInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
-            
-            
-            
-            
         ])
     }
     
