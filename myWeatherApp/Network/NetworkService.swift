@@ -21,7 +21,7 @@ class NetworkService {
         let parameters: JSONDict = ["q": city,
                                     "appid": apiKey,
                                     "units": "metric",
-                                    "lang": "ru"]
+                                    "lang": "en"]
         guard let url = URL.url(with: baseURL, endpoint: method, queryParams: parameters) else {
             completion(.failure(.badURL))
             return
@@ -41,7 +41,7 @@ class NetworkService {
                       completion(.failure(.badJSON))
                       return
                   }
-            print(jsonString)
+//            print(jsonString)
             completion(.success(model))
         }.resume()
     }

@@ -11,7 +11,8 @@ class WeatherListViewController: UIViewController {
     
     private let networkService = NetworkService()
     private let citiesDefaultArray = ["Москва", "Питер"]
-    private let city = "Москва"
+    private let city = "Абакан"
+    private var ar: [WeatherResponce] = []
     
 //    private let weatherSearchController = UISearchController(searchResultsController: nil)
     private var collectionView: UICollectionView = {
@@ -30,6 +31,27 @@ class WeatherListViewController: UIViewController {
         setupViews()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        for city in citiesDefaultArray {
+            networkService.fetchWeather(in: city) { (WeatherResponce) in
+                switch WeatherResponce {
+                    
+                case .success(let test):
+                    self.ar.append(test)
+                    print(test)
+                case .failure(let test2):
+                    print(test2)
+                }
+//                print(WeatherResponce)
+                
+                
+            }
+        }
+//        print(ar)
+        
+//        networkService.fetchWeather(in: "Москва") { (WeatherResponce) in
+//            print(WeatherResponce)
+//        }
         
     }
 
