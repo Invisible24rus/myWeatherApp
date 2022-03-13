@@ -38,7 +38,7 @@ class CityCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .white
-        contentView.layer.cornerRadius = contentView.frame.size.width / 10
+        contentView.layer.cornerRadius = contentView.frame.size.width / 15
         setConstraints()
     }
     
@@ -50,7 +50,6 @@ class CityCollectionViewCell: UICollectionViewCell {
         temperatueInfoLabel.text = "\(Int(model.weather.temperature))°"
         cityInfoLabel.text = model.cityName
         weatherPropertiesLabel.text = model.types.first?.weatherProperty.capitalized
-
     }
     
     func setConstraints() {
@@ -67,5 +66,4 @@ class CityCollectionViewCell: UICollectionViewCell {
             cityInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
         ])
     }
-    
 }
