@@ -14,6 +14,8 @@
 		114E805C279DD30C00C66CD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 114E805B279DD30C00C66CD4 /* Assets.xcassets */; };
 		114E805F279DD30C00C66CD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 114E805D279DD30C00C66CD4 /* LaunchScreen.storyboard */; };
 		114E8067279DD6C000C66CD4 /* UIView + Constraints.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8066279DD6C000C66CD4 /* UIView + Constraints.swift.swift */; };
+		1150D01C27DE40A90056341D /* addCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1150D01B27DE40A90056341D /* addCity.swift */; };
+		1150D01E27DE49D70056341D /* getCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1150D01D27DE49D70056341D /* getCities.swift */; };
 		1157244D27CBC3E0001E8B6D /* WeatherMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157244C27CBC3E0001E8B6D /* WeatherMainViewController.swift */; };
 		1157244F27CBCA1C001E8B6D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157244E27CBCA1C001E8B6D /* NetworkService.swift */; };
 		1157245227CBD4EB001E8B6D /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157245127CBD4EB001E8B6D /* WeatherResponse.swift */; };
@@ -34,6 +36,8 @@
 		114E805E279DD30C00C66CD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		114E8060279DD30C00C66CD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		114E8066279DD6C000C66CD4 /* UIView + Constraints.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Constraints.swift.swift"; sourceTree = "<group>"; };
+		1150D01B27DE40A90056341D /* addCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addCity.swift; sourceTree = "<group>"; };
+		1150D01D27DE49D70056341D /* getCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCities.swift; sourceTree = "<group>"; };
 		1157244C27CBC3E0001E8B6D /* WeatherMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMainViewController.swift; sourceTree = "<group>"; };
 		1157244E27CBCA1C001E8B6D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1157245127CBD4EB001E8B6D /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
@@ -76,6 +80,7 @@
 			children = (
 				114E8068279DDB5D00C66CD4 /* Extensions */,
 				1157245027CBD4C6001E8B6D /* Network */,
+				1150D01B27DE40A90056341D /* addCity.swift */,
 				114E8052279DD30B00C66CD4 /* AppDelegate.swift */,
 				114E8054279DD30B00C66CD4 /* SceneDelegate.swift */,
 				114E8056279DD30B00C66CD4 /* WeatherListViewController.swift */,
@@ -114,6 +119,7 @@
 				114E8069279DDFF000C66CD4 /* Models */,
 				1157244E27CBCA1C001E8B6D /* NetworkService.swift */,
 				1157245827CBF66F001E8B6D /* NetworkError.swift */,
+				1150D01D27DE49D70056341D /* getCities.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -195,10 +201,12 @@
 				114E8057279DD30B00C66CD4 /* WeatherListViewController.swift in Sources */,
 				114E8053279DD30B00C66CD4 /* AppDelegate.swift in Sources */,
 				1157245527CBE3F1001E8B6D /* Weather.swift in Sources */,
+				1150D01C27DE40A90056341D /* addCity.swift in Sources */,
 				1157244D27CBC3E0001E8B6D /* WeatherMainViewController.swift in Sources */,
 				114E8055279DD30B00C66CD4 /* SceneDelegate.swift in Sources */,
 				1157244F27CBCA1C001E8B6D /* NetworkService.swift in Sources */,
 				1157245927CBF66F001E8B6D /* NetworkError.swift in Sources */,
+				1150D01E27DE49D70056341D /* getCities.swift in Sources */,
 				1157245227CBD4EB001E8B6D /* WeatherResponse.swift in Sources */,
 				1157245B27CBFB8B001E8B6D /* URL + Extensions.swift in Sources */,
 			);

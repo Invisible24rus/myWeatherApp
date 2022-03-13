@@ -15,11 +15,26 @@ class WeatherMainViewController: UIViewController {
 
     private let weatherHumidityLabel = UILabel()
     private var weatherHumidityValueLabel = UILabel()
+    
+    var weatherModel: WeatherResponce?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .systemGray5
+        setupViews()
+        reloadWeatherMainVC()
+    }
+    
+    func reloadWeatherMainVC() {
+        if let weatherModel = weatherModel {
+            cityNameLabel.text = weatherModel.cityName
+            weatherInfoLabel.text = weatherModel.types.first?.weatherProperty.capitalized
+            weatherTemperatureLabel.text = "\(Int(weatherModel.weather.temperature))°"
+            weatherHumidityValueLabel.text = "\(Int(weatherModel.weather.humidity))%"
+        } else {
+            return
+        }
     }
 }
 
@@ -32,28 +47,43 @@ private extension WeatherMainViewController {
         
         view.addSubviewsForAutoLayout([cityNameLabel,weatherInfoLabel,weatherTemperatureLabel, weatherHumidityLabel, weatherHumidityValueLabel])
         
-        cityNameLabel.text = "Название"
-        weatherInfoLabel.text = "Ясно"
-        weatherTemperatureLabel.text = "33"
+        cityNameLabel.text = "XXXX"
+        cityNameLabel.textColor = .black
+        cityNameLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        
+        weatherInfoLabel.text = "YASNO"
+        weatherInfoLabel.textColor = .black
+        weatherInfoLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        
+        weatherTemperatureLabel.text = "55"
+        weatherTemperatureLabel.textColor = .black
+        weatherTemperatureLabel.font = UIFont.boldSystemFont(ofSize: 64.0)
+        
         weatherHumidityLabel.text = "Влажность"
-        weatherHumidityValueLabel.text = "8"
+        weatherHumidityLabel.textColor = .black
+        weatherHumidityLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        
+        weatherHumidityValueLabel.text = "6555"
+        weatherHumidityValueLabel.textColor = .black
+        weatherHumidityValueLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        
         
         NSLayoutConstraint.activate([
             
-            cityNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            cityNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
             cityNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            weatherInfoLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 20),
-            weatherInfoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            weatherTemperatureLabel.topAnchor.constraint(equalTo: weatherInfoLabel.bottomAnchor, constant: 10),
+            weatherTemperatureLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 20),
             weatherTemperatureLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            weatherHumidityLabel.topAnchor.constraint(equalTo: weatherTemperatureLabel.bottomAnchor, constant: 50),
+            weatherInfoLabel.topAnchor.constraint(equalTo: weatherTemperatureLabel.bottomAnchor, constant: 10),
+            weatherInfoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            weatherHumidityLabel.topAnchor.constraint(equalTo: weatherInfoLabel.bottomAnchor, constant: 50),
             weatherHumidityLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             
-            weatherHumidityValueLabel.topAnchor.constraint(equalTo: weatherTemperatureLabel.bottomAnchor, constant: 50),
-            weatherHumidityValueLabel.leadingAnchor.constraint(equalTo: weatherHumidityLabel.trailingAnchor, constant: 100)
+            weatherHumidityValueLabel.topAnchor.constraint(equalTo: weatherInfoLabel.bottomAnchor, constant: 50),
+            weatherHumidityValueLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
             
             
         ])

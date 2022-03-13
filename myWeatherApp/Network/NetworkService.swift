@@ -21,14 +21,13 @@ class NetworkService {
         let parameters: JSONDict = ["q": city,
                                     "appid": apiKey,
                                     "units": "metric",
-                                    "lang": "en"]
+                                    "lang": "ru"]
         guard let url = URL.url(with: baseURL, endpoint: method, queryParams: parameters) else {
             completion(.failure(.badURL))
             return
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-            
             guard let response = response as? HTTPURLResponse,
                   (200...299).contains(response.statusCode) else {
                       completion(.failure(.notFound))

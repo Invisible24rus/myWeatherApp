@@ -13,15 +13,15 @@ class CityCollectionViewCell: UICollectionViewCell {
     
     private var weatherPropertiesLabel: UILabel = {
         let label = UILabel()
-        label.text = "Snow"
+        label.text = ""
         label.textColor = .gray
-        label.font = UIFont.boldSystemFont(ofSize: 24.0)
+        label.font = UIFont.boldSystemFont(ofSize: 22.0)
         return label
     }()
     
     private var temperatueInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "34°"
+        label.text = ""
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 64.0)
         return label
@@ -29,9 +29,9 @@ class CityCollectionViewCell: UICollectionViewCell {
     
     private var cityInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = "New York"
+        label.text = ""
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 24.0)
+        label.font = UIFont.boldSystemFont(ofSize: 22.0)
         return label
     }()
 
@@ -46,18 +46,25 @@ class CityCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func cellConfig(model: WeatherResponce) {
+        temperatueInfoLabel.text = "\(Int(model.weather.temperature))°"
+        cityInfoLabel.text = model.cityName
+        weatherPropertiesLabel.text = model.types.first?.weatherProperty.capitalized
+
+    }
+    
     func setConstraints() {
         contentView.addSubviewsForAutoLayout([weatherPropertiesLabel, temperatueInfoLabel, cityInfoLabel])
         
         NSLayoutConstraint.activate([
-            weatherPropertiesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            weatherPropertiesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             weatherPropertiesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             temperatueInfoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             temperatueInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
-            cityInfoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            cityInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
+            cityInfoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
+            cityInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
         ])
     }
     

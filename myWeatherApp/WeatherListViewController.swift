@@ -10,15 +10,15 @@ import UIKit
 class WeatherListViewController: UIViewController {
     
     private let networkService = NetworkService()
-    private let citiesDefaultArray = ["Москва", "Питер"]
-    private let city = "Абакан"
-    private var ar: [WeatherResponce] = []
+    private var emptyCity = WeatherResponce()
+    private var citiesDefaultArray = ["Питер", "Абакан", "Москва"]
+    private var cityResponceArray: [WeatherResponce] = []
     
 //    private let weatherSearchController = UISearchController(searchResultsController: nil)
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 50, bottom: 50, right: 50)
+        layout.sectionInset = UIEdgeInsets(top: 25, left: 50, bottom: 50, right: 50)
         layout.minimumLineSpacing = 50
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemGray5
@@ -31,31 +31,50 @@ class WeatherListViewController: UIViewController {
         setupViews()
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        for city in citiesDefaultArray {
-            networkService.fetchWeather(in: city) { (WeatherResponce) in
-                switch WeatherResponce {
-                    
-                case .success(let test):
-                    self.ar.append(test)
-                    print(test)
-                case .failure(let test2):
-                    print(test2)
-                }
-//                print(WeatherResponce)
-                
-                
-            }
-        }
-//        print(ar)
-        
-//        networkService.fetchWeather(in: "Москва") { (WeatherResponce) in
-//            print(WeatherResponce)
-//        }
+        getCityWeather()
         
     }
-
+    
+    func getCityWeather() {
+        for city in citiesDefaultArray {
+            featchWeaher(city: city)
+        }
+    }
+    
+    
+    func featchWeaher(city: String) {
+        networkService.fetchWeather(in: city) { [weak self] result in
+            DispatchQueue.main.async  {
+                guard let self = self else { return }
+                switch result {
+                case let .success(weatherResponce):
+                    self.cityResponceArray.insert(weatherResponce, at: 0)
+                case let .failure(error):
+                    print(error)
+                }
+                print(result)
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    @objc func pressPlusButton() {
+        alertAddCity(name: "", placeholder: "Введите город") { (city) in
+            self.citiesDefaultArray.append(city)
+            self.featchWeaher(city: city)
+        }
+    }
+ 
+    
+    
+    
 }
+
+
+
+
+
+
 
 //MARK: - Private
 
@@ -64,8 +83,12 @@ private extension WeatherListViewController {
     func setupViews() {
         view.addSubview(collectionView)
         view.bindSubviewsToBoundsView(collectionView)
-//        title = "Список городов"
-//        navigationItem.searchController = weatherSearchController
+        
+        title = "Список городов"
+//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24.0)]
+        let addCityButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pressPlusButton))
+        navigationItem.rightBarButtonItem = addCityButton
+        //        navigationItem.searchController = weatherSearchController
 //        weatherSearchController.searchResultsUpdater = self
 //        weatherSearchController.searchBar.placeholder = "Поиск города"
         
@@ -98,6 +121,17 @@ extension WeatherListViewController: UICollectionViewDelegateFlowLayout {
         let itemHeight = itemWidth - 100
         return CGSize(width: itemWidth, height: itemHeight)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cityWeather = cityResponceArray[indexPath.row]
+        let weatherMainViewController = WeatherMainViewController()
+        weatherMainViewController.weatherModel = cityWeather
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.pushViewController(weatherMainViewController, animated: true)
+//        weatherMainViewController.modalPresentationStyle = .fullScreen
+//        present(weatherMainViewController, animated: true, completion: nil)
+    }
 
 }
 
@@ -107,11 +141,14 @@ extension WeatherListViewController: UICollectionViewDelegateFlowLayout {
 extension WeatherListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        citiesDefaultArray.count
+        cityResponceArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CityCollectionViewCell.identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CityCollectionViewCell.identifier, for: indexPath) as! CityCollectionViewCell
+        
+        let model = cityResponceArray[indexPath.row]
+        cell.cellConfig(model: model)
         return cell
     }
     
