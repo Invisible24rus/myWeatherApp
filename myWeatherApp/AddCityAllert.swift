@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     
-    func alertAddCity(name: String, placeholder: String, completion: @escaping (String) -> Void) {
+    func addCityAllert(name: String, placeholder: String, completion: @escaping (String) -> Void) {
         
         let alertController = UIAlertController(title: name, message: nil, preferredStyle: .alert)
         let alertDone = UIAlertAction(title: "Добавить", style: .default) { (action) in

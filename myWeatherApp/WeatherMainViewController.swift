@@ -42,10 +42,10 @@ class WeatherMainViewController: UIViewController {
     
     func reloadWeatherMainVC() {
         if let weatherModel = weatherModel {
-            cityNameLabel.text = weatherModel.cityName
-            weatherInfoLabel.text = weatherModel.types.first?.weatherProperty.capitalized
-            weatherTemperatureLabel.text = "\(Int(weatherModel.weather.temperature))°"
-            weatherHumidityValueLabel.text = "\(Int(weatherModel.weather.humidity))%"
+            cityNameLabel.text = weatherModel.name
+            weatherInfoLabel.text = weatherModel.current.weather.first?.weatherDescription.capitalized
+            weatherTemperatureLabel.text = "\(Int(weatherModel.current.temp))°"
+            weatherHumidityValueLabel.text = "\(Int(weatherModel.current.humidity))%"
         } else {
             return
         }

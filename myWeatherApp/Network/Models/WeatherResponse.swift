@@ -8,20 +8,41 @@
 import Foundation
 
 struct WeatherResponce: Decodable {
-    let types: [WeatherType]
-    let weather: Weather
-    let cityName: String
-    
-    enum CodingKeys: String, CodingKey {
-        case types = "weather"
-        case weather = "main"
-        case cityName = "name"
-    }
+    var name: String? = ""
+    let current: Current
     
     init() {
-        types = [WeatherType(weatherProperty: "")]
-        weather = Weather(temperature: 0.0, humidity: 0)
-        cityName = ""
+        current = Current.init()
     }
- 
 }
+
+struct Current: Decodable {
+    let weather: [Weather]
+    let humidity: Int
+    let windSpeed: Double
+    let temp: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case weather
+        case humidity
+        case windSpeed = "wind_speed"
+        case temp
+       }
+    
+    init() {
+        weather = [Weather(weatherDescription: "")]
+        humidity = 0
+        windSpeed = 0.0
+        temp = 0.0
+    }
+}
+
+struct Weather: Decodable {
+    let weatherDescription: String
+    
+    enum CodingKeys: String, CodingKey {
+        case weatherDescription = "description"
+       }
+}
+
+

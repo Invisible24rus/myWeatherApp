@@ -14,11 +14,13 @@ class NetworkService {
     
     let baseURL = "https://api.openweathermap.org/data/2.5/"
     let apiKey = "ee2ee9b08d1a04076b75d0d38942f854"
-    let method = "weather"
+    let method = "onecall"
     
-    func fetchWeather(in city: String, completion: @escaping (Result<WeatherResponce, NetworkError>) -> Void) {
+    func fetchWeather(latitude: Double, longitude: Double, completion: @escaping (Result<WeatherResponce, NetworkError>) -> Void) {
         
-        let parameters: JSONDict = ["q": city,
+        let parameters: JSONDict = ["lat": latitude,
+                                    "lon": longitude,
+                                    "exclude": "minutely,alerts",
                                     "appid": apiKey,
                                     "units": "metric",
                                     "lang": "ru"]
@@ -41,8 +43,8 @@ class NetworkService {
                       return
                   }
 //            print(jsonString)
+//            print(url)
             completion(.success(model))
         }.resume()
     }
 }
-

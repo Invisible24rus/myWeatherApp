@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherListViewController: UIViewController {
     
@@ -32,38 +33,61 @@ class WeatherListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         cityResponceArray = Array(repeating: emptyCity, count: citiesDefaultArray.count)
-        getCityWeather()
+        getCityWeatherCell()
+        
         
     }
     
-    func getCityWeather() {
+    func getCityWeatherCell() {
         for (index, city) in citiesDefaultArray.enumerated() {
-            fetchWeaher(city: city, index: index)
-        }
-    }
-    
-    
-    func fetchWeaher(city: String, index: Int) {
-        networkService.fetchWeather(in: city) { [weak self] result in
-            DispatchQueue.main.async  {
-                guard let self = self else { return }
-                switch result {
-                case let .success(weatherResponce):
-                    self.cityResponceArray[index] = weatherResponce
-                case let .failure(error):
-                    print(error)
+//            getCityWeatherData(city: city, index: index)
+            getCoordinateFrom(city: city) { coordinate, error in
+                guard let coordinate = coordinate, error == nil else { return }
+                
+                self.networkService.fetchWeather(latitude: coordinate.latitude, longitude: coordinate.longitude) { [weak self] result in
+                    DispatchQueue.main.async  {
+                        guard let self = self else { return }
+                        switch result {
+                        case let .success(weatherResponce):
+                            self.cityResponceArray[index] = weatherResponce
+                            self.cityResponceArray[index].name = self.citiesDefaultArray[index]
+                        case let .failure(error):
+                            print(error)
+                        }
+                        self.collectionView.reloadData()
+                    }
                 }
-//                print(result)
-                self.collectionView.reloadData()
             }
         }
     }
     
+    func getCityWeatherData(city: String, index: Int) {
+
+        getCoordinateFrom(city: city) { coordinate, error in
+            guard let coordinate = coordinate, error == nil else { return }
+            
+            self.networkService.fetchWeather(latitude: coordinate.latitude, longitude: coordinate.longitude) { [weak self] result in
+                DispatchQueue.main.async  {
+                    guard let self = self else { return }
+                    switch result {
+                    case let .success(weatherResponce):
+                        self.citiesDefaultArray.insert(city, at: 0)
+                        self.cityResponceArray.insert(self.emptyCity, at: 0)
+                        self.cityResponceArray[index] = weatherResponce
+                        self.cityResponceArray[index].name = self.citiesDefaultArray[index]
+                    case let .failure(error):
+                        print(error)
+                    }
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }
+
     @objc func pressPlusButton() {
-        alertAddCity(name: "", placeholder: "Введите город") { [weak self ] (city) in
+        addCityAllert(name: "", placeholder: "Введите город") { [weak self] (city) in
             guard let self = self else { return }
-            self.citiesDefaultArray.append(city)
-            self.fetchWeaher(city: city, index: 0)
+            self.getCityWeatherData(city: city, index: 0)
         }
     }
  
@@ -139,7 +163,6 @@ extension WeatherListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CityCollectionViewCell.identifier, for: indexPath) as! CityCollectionViewCell
-        
         let model = cityResponceArray[indexPath.row]
         cell.cellConfig(model: model)
         return cell

@@ -47,9 +47,9 @@ class CityCollectionViewCell: UICollectionViewCell {
     }
     
     func cellConfig(model: WeatherResponce) {
-        temperatueInfoLabel.text = "\(Int(model.weather.temperature))°"
-        cityInfoLabel.text = model.cityName
-        weatherPropertiesLabel.text = model.types.first?.weatherProperty.capitalized
+        temperatueInfoLabel.text = "\(Int(model.current.temp))°"
+        cityInfoLabel.text = model.name
+        weatherPropertiesLabel.text = model.current.weather.first?.weatherDescription.capitalized
     }
     
     func setConstraints() {
