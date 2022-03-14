@@ -10,19 +10,23 @@ import Foundation
 struct WeatherResponce: Decodable {
     var name: String? = ""
     let current: Current
+    let hourly: [Current]
     
     init() {
         current = Current.init()
+        hourly = [Current.init()]
     }
 }
 
 struct Current: Decodable {
+    let dt: Int
     let weather: [Weather]
     let humidity: Int
     let windSpeed: Double
     let temp: Double
     
     enum CodingKeys: String, CodingKey {
+        case dt
         case weather
         case humidity
         case windSpeed = "wind_speed"
@@ -30,6 +34,7 @@ struct Current: Decodable {
        }
     
     init() {
+        dt = 0
         weather = [Weather(weatherDescription: "")]
         humidity = 0
         windSpeed = 0.0

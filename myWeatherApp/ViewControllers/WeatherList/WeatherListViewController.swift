@@ -12,7 +12,7 @@ class WeatherListViewController: UIViewController {
     
     private let networkService = NetworkService()
     private var emptyCity = WeatherResponce()
-    private var citiesDefaultArray = ["Екатеринбург", "Питер", "Абакан", "Москва"]
+    private var citiesDefaultArray: [String] = ["Москва","Питер"]
     private var cityResponceArray: [WeatherResponce] = []
     
 //    private let weatherSearchController = UISearchController(searchResultsController: nil)
@@ -27,6 +27,7 @@ class WeatherListViewController: UIViewController {
         return collectionView
     }()
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -35,12 +36,10 @@ class WeatherListViewController: UIViewController {
         cityResponceArray = Array(repeating: emptyCity, count: citiesDefaultArray.count)
         getCityWeatherCell()
         
-        
     }
     
     func getCityWeatherCell() {
         for (index, city) in citiesDefaultArray.enumerated() {
-//            getCityWeatherData(city: city, index: index)
             getCoordinateFrom(city: city) { coordinate, error in
                 guard let coordinate = coordinate, error == nil else { return }
                 
@@ -51,6 +50,7 @@ class WeatherListViewController: UIViewController {
                         case let .success(weatherResponce):
                             self.cityResponceArray[index] = weatherResponce
                             self.cityResponceArray[index].name = self.citiesDefaultArray[index]
+                            print(weatherResponce)
                         case let .failure(error):
                             print(error)
                         }
@@ -60,6 +60,8 @@ class WeatherListViewController: UIViewController {
             }
         }
     }
+    
+   
     
     func getCityWeatherData(city: String, index: Int) {
 

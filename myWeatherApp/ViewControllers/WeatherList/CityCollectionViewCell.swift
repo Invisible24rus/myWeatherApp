@@ -11,6 +11,8 @@ class CityCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CityCollectionViewCell"
     
+    
+    
     private var weatherPropertiesLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -46,10 +48,12 @@ class CityCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    
     func cellConfig(model: WeatherResponce) {
         temperatueInfoLabel.text = "\(Int(model.current.temp))°"
-        cityInfoLabel.text = model.name
-        weatherPropertiesLabel.text = model.current.weather.first?.weatherDescription.capitalized
+        cityInfoLabel.text = model.name?.firstUppercased
+        weatherPropertiesLabel.text = model.current.weather.first?.weatherDescription.firstUppercased
     }
     
     func setConstraints() {

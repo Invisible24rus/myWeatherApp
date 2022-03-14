@@ -8,44 +8,60 @@
 import UIKit
 
 class WeatherMainViewController: UIViewController {
+    var weatherModel: WeatherResponce?
+
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     
     private var cityNameLabel = UILabel()
     private var weatherInfoLabel = UILabel()
     private var weatherTemperatureLabel = UILabel()
     private var cardWeatherView = UIView()
-
     private let weatherHumidityLabel = UILabel()
     private var weatherHumidityValueLabel = UILabel()
+    private var windSpeedLabel = UILabel()
+    private var windSpeedValueLabel = UILabel()
     
-    var weatherModel: WeatherResponce?
-    
-    private var collectionViewTemp: UICollectionView = {
+    private let collectionViewWeatherHourlyTemp: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumLineSpacing = 15
         let collectionViewTemp = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionViewTemp.backgroundColor = .green
+        collectionViewTemp.backgroundColor = .white
+        collectionViewTemp.layer.cornerRadius = 15
         collectionViewTemp.register(WeatherTempForecastCollectionViewCell.self, forCellWithReuseIdentifier: WeatherTempForecastCollectionViewCell.identifier)
         return collectionViewTemp
+    }()
+    
+    private let tableViewWeatherDaysTemp: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .none
+        tableView.layer.cornerRadius = 15
+        tableView.register(DaysTempTableViewCell.self, forCellReuseIdentifier: DaysTempTableViewCell.identifier)
+        return tableView
     }()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray5
         setupViews()
-        collectionViewTemp.delegate = self
-        collectionViewTemp.dataSource = self
+        self.collectionViewWeatherHourlyTemp.reloadData()
+        collectionViewWeatherHourlyTemp.delegate = self
+        collectionViewWeatherHourlyTemp.dataSource = self
         reloadWeatherMainVC()
+        
     }
     
     func reloadWeatherMainVC() {
+        
         if let weatherModel = weatherModel {
-            cityNameLabel.text = weatherModel.name
-            weatherInfoLabel.text = weatherModel.current.weather.first?.weatherDescription.capitalized
+            cityNameLabel.text = weatherModel.name?.firstUppercased
+            weatherInfoLabel.text = weatherModel.current.weather.first?.weatherDescription.firstUppercased
             weatherTemperatureLabel.text = "\(Int(weatherModel.current.temp))°"
             weatherHumidityValueLabel.text = "\(Int(weatherModel.current.humidity))%"
+            windSpeedValueLabel.text = "\(Int(weatherModel.current.windSpeed)) м/с"
         } else {
             return
         }
@@ -59,8 +75,19 @@ private extension WeatherMainViewController {
     
     func setupViews() {
         
-        view.addSubviewsForAutoLayout([weatherHumidityLabel, weatherHumidityValueLabel, cardWeatherView, collectionViewTemp])
+        view.addSubviewsForAutoLayout(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubviewsForAutoLayout([weatherHumidityLabel, weatherHumidityValueLabel, cardWeatherView, collectionViewWeatherHourlyTemp, windSpeedLabel, windSpeedValueLabel, tableViewWeatherDaysTemp])
         cardWeatherView.addSubviewsForAutoLayout([cityNameLabel, weatherInfoLabel, weatherTemperatureLabel])
+        
+        
+        
+        contentView.backgroundColor = .systemGray5
+        view.backgroundColor = .systemGray5
+        scrollView.backgroundColor = .systemGray5
+        scrollView.bounces = true
         
         cardWeatherView.backgroundColor = .white
         cardWeatherView.layer.cornerRadius = 25
@@ -85,15 +112,41 @@ private extension WeatherMainViewController {
         weatherHumidityValueLabel.textColor = .black
         weatherHumidityValueLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         
+        windSpeedLabel.text = "Скорость ветра"
+        windSpeedLabel.textColor = .black
+        windSpeedLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        
+        windSpeedValueLabel.text = ""
+        windSpeedValueLabel.textColor = .black
+        windSpeedValueLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        
         
         NSLayoutConstraint.activate([
             
-            collectionViewTemp.topAnchor.constraint(equalTo: weatherHumidityLabel.bottomAnchor, constant: 50),
-            collectionViewTemp.heightAnchor.constraint(equalToConstant: 100),
-            collectionViewTemp.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            collectionViewTemp.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            cardWeatherView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+            collectionViewWeatherHourlyTemp.topAnchor.constraint(equalTo: windSpeedLabel.bottomAnchor, constant: 50),
+            collectionViewWeatherHourlyTemp.heightAnchor.constraint(equalToConstant: 100),
+            collectionViewWeatherHourlyTemp.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionViewWeatherHourlyTemp.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            tableViewWeatherDaysTemp.topAnchor.constraint(equalTo: collectionViewWeatherHourlyTemp.bottomAnchor, constant: 50),
+            tableViewWeatherDaysTemp.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            tableViewWeatherDaysTemp.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            tableViewWeatherDaysTemp.heightAnchor.constraint(equalToConstant: 300),
+            tableViewWeatherDaysTemp.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -0),
+            
+            
+            cardWeatherView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 25),
             cardWeatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             cardWeatherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             cardWeatherView.heightAnchor.constraint(equalToConstant: 300),
@@ -111,7 +164,13 @@ private extension WeatherMainViewController {
             weatherHumidityLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             
             weatherHumidityValueLabel.topAnchor.constraint(equalTo: cardWeatherView.bottomAnchor, constant: 50),
-            weatherHumidityValueLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)  
+            weatherHumidityValueLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            windSpeedLabel.topAnchor.constraint(equalTo: weatherHumidityValueLabel.bottomAnchor, constant: 20),
+            windSpeedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            windSpeedValueLabel.topAnchor.constraint(equalTo: weatherHumidityValueLabel.bottomAnchor, constant: 20),
+            windSpeedValueLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
 
         
@@ -133,11 +192,15 @@ extension WeatherMainViewController: UICollectionViewDelegateFlowLayout {
 
 extension WeatherMainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+//        weatherModel?.hourly.count ?? 0
+        24
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherTempForecastCollectionViewCell.identifier, for: indexPath) as! WeatherTempForecastCollectionViewCell
+        if let model = weatherModel?.hourly[indexPath.row] {
+            cell.cellConfig(model: model)
+        }
         return cell
     }
 }
