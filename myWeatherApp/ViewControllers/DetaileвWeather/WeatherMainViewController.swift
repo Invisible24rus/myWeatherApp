@@ -199,6 +199,8 @@ extension WeatherMainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherTempForecastCollectionViewCell.identifier, for: indexPath) as! WeatherTempForecastCollectionViewCell
         if let model = weatherModel?.hourly[indexPath.row] {
+//            может проверить на isEmpty?
+            
             cell.cellConfig(model: model)
         }
         return cell
