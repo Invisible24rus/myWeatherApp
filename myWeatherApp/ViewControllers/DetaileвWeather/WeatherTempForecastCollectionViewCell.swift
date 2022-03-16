@@ -14,8 +14,8 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
     private var weatherTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "1"
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = .systemBlue
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
     }()
     
@@ -25,13 +25,11 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
         return formatter
     }()
     
-   
-    
     private var temperatueInfoLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 14.0)
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
     }()
     

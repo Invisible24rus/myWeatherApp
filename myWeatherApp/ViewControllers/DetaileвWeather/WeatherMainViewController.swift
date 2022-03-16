@@ -23,6 +23,7 @@ class WeatherMainViewController: UIViewController {
     private var weatherHumidityValueLabel = UILabel()
     private var windSpeedLabel = UILabel()
     private var windSpeedValueLabel = UILabel()
+    private var welcomeLabel = UILabel()
     
     private let collectionViewWeatherHourlyTemp: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,6 +33,7 @@ class WeatherMainViewController: UIViewController {
         let collectionViewTemp = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionViewTemp.backgroundColor = .white
         collectionViewTemp.layer.cornerRadius = 15
+        collectionViewTemp.showsHorizontalScrollIndicator = false
         collectionViewTemp.register(WeatherTempForecastCollectionViewCell.self, forCellWithReuseIdentifier: WeatherTempForecastCollectionViewCell.identifier)
         return collectionViewTemp
     }()
@@ -41,6 +43,7 @@ class WeatherMainViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.layer.cornerRadius = 15
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(DaysTempTableViewCell.self, forCellReuseIdentifier: DaysTempTableViewCell.identifier)
         return tableView
     }()
@@ -64,6 +67,7 @@ class WeatherMainViewController: UIViewController {
             cityNameLabel.text = weatherModel.name?.firstUppercased
             weatherInfoLabel.text = weatherModel.current.weather.first?.weatherDescription.firstUppercased
             weatherTemperatureLabel.text = "\(Int(weatherModel.current.temp))°"
+            welcomeLabel.text = "Welcome Buddy"
             weatherHumidityValueLabel.text = "\(Int(weatherModel.current.humidity))%"
             windSpeedValueLabel.text = "\(Int(weatherModel.current.windSpeed)) м/с"
         } else {
@@ -84,7 +88,7 @@ private extension WeatherMainViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubviewsForAutoLayout([weatherHumidityLabel, weatherHumidityValueLabel, cardWeatherView, collectionViewWeatherHourlyTemp, windSpeedLabel, windSpeedValueLabel, tableViewWeatherDaysTemp])
-        cardWeatherView.addSubviewsForAutoLayout([cityNameLabel, weatherInfoLabel, weatherTemperatureLabel])
+        cardWeatherView.addSubviewsForAutoLayout([cityNameLabel, weatherInfoLabel, weatherTemperatureLabel, welcomeLabel])
         
         
         
@@ -124,6 +128,10 @@ private extension WeatherMainViewController {
         windSpeedValueLabel.textColor = .black
         windSpeedValueLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         
+        welcomeLabel.text = "XXX"
+        welcomeLabel.textColor = .systemBlue
+        welcomeLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        
         
         NSLayoutConstraint.activate([
             
@@ -156,13 +164,16 @@ private extension WeatherMainViewController {
             cardWeatherView.heightAnchor.constraint(equalToConstant: 300),
             
             cityNameLabel.topAnchor.constraint(equalTo: cardWeatherView.topAnchor, constant: 25),
-            cityNameLabel.centerXAnchor.constraint(equalTo: cardWeatherView.centerXAnchor),
+            cityNameLabel.leadingAnchor.constraint(equalTo: cardWeatherView.leadingAnchor, constant: 20),
             
             weatherTemperatureLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 20),
-            weatherTemperatureLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            weatherTemperatureLabel.leadingAnchor.constraint(equalTo: cardWeatherView.leadingAnchor, constant: 20),
             
             weatherInfoLabel.topAnchor.constraint(equalTo: weatherTemperatureLabel.bottomAnchor, constant: 10),
-            weatherInfoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            weatherInfoLabel.leadingAnchor.constraint(equalTo: cardWeatherView.leadingAnchor, constant: 20),
+            
+            welcomeLabel.topAnchor.constraint(equalTo: weatherInfoLabel.bottomAnchor, constant: 10),
+            welcomeLabel.leadingAnchor.constraint(equalTo: cardWeatherView.leadingAnchor, constant: 20),
             
             weatherHumidityLabel.topAnchor.constraint(equalTo: cardWeatherView.bottomAnchor, constant: 50),
             weatherHumidityLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),

@@ -12,19 +12,22 @@ class DaysTempTableViewCell: UITableViewCell {
     private let nameWeekDayLabel: UILabel = {
         let label = UILabel()
         label.text = "PON"
-        label.textColor = .black
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
     }()
     private let dailyTemperatureLabel: UILabel = {
         let label = UILabel()
         label.text = "15C"
         label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
     }()
     private let nightTemperature: UILabel = {
         let label = UILabel()
         label.text = "30C"
-        label.textColor = .black
+        label.textColor = .systemGray
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
     }()
     
@@ -53,8 +56,8 @@ class DaysTempTableViewCell: UITableViewCell {
     func cellConfig(model: Daily) {
         let day = getDayFor(timestamp: model.dt)
         nameWeekDayLabel.text = "\(day.firstUppercased)"
-        dailyTemperatureLabel.text = "\(Int(model.temp.day))"
-        nightTemperature.text = "\(Int(model.temp.night))"
+        dailyTemperatureLabel.text = "\(Int(model.temp.day))°"
+        nightTemperature.text = "\(Int(model.temp.night))°"
     }
     
     func setConstraints() {
@@ -68,7 +71,7 @@ class DaysTempTableViewCell: UITableViewCell {
             dailyTemperatureLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             nightTemperature.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            nightTemperature.trailingAnchor.constraint(equalTo: dailyTemperatureLabel.leadingAnchor, constant: -10),
+            nightTemperature.trailingAnchor.constraint(equalTo: dailyTemperatureLabel.leadingAnchor, constant: -20),
         ])
     }
     
