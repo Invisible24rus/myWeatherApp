@@ -12,7 +12,7 @@ class WeatherListViewController: UIViewController {
     
     private let networkService = NetworkService()
     private var emptyCity = WeatherResponce()
-    private var citiesDefaultArray: [String] = ["Москва","Питер"]
+    private var citiesDefaultArray: [String] = ["Питер"]
     private var cityResponceArray: [WeatherResponce] = []
     
 //    private let weatherSearchController = UISearchController(searchResultsController: nil)
@@ -50,7 +50,7 @@ class WeatherListViewController: UIViewController {
                         case let .success(weatherResponce):
                             self.cityResponceArray[index] = weatherResponce
                             self.cityResponceArray[index].name = self.citiesDefaultArray[index]
-                            print(weatherResponce)
+                            print(weatherResponce.daily)
                         case let .failure(error):
                             print(error)
                         }
@@ -155,7 +155,7 @@ extension WeatherListViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-//MARK: - UICollectionViewDataSource
+
 
 extension WeatherListViewController: UICollectionViewDataSource {
     

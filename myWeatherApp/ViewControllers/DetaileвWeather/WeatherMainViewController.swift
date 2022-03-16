@@ -8,6 +8,8 @@
 import UIKit
 
 class WeatherMainViewController: UIViewController {
+    
+    
     var weatherModel: WeatherResponce?
 
     private let scrollView = UIScrollView()
@@ -50,6 +52,8 @@ class WeatherMainViewController: UIViewController {
         self.collectionViewWeatherHourlyTemp.reloadData()
         collectionViewWeatherHourlyTemp.delegate = self
         collectionViewWeatherHourlyTemp.dataSource = self
+//        tableViewWeatherDaysTemp.delegate = self
+        tableViewWeatherDaysTemp.dataSource = self
         reloadWeatherMainVC()
         
     }
@@ -177,7 +181,7 @@ private extension WeatherMainViewController {
     }
 }
 
-
+//MARK: - UICollectionViewDelegate
 extension WeatherMainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
@@ -189,7 +193,7 @@ extension WeatherMainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
+//MARK: - UICollectionViewDataSource
 extension WeatherMainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        weatherModel?.hourly.count ?? 0
@@ -204,5 +208,27 @@ extension WeatherMainViewController: UICollectionViewDataSource {
             cell.cellConfig(model: model)
         }
         return cell
+    }
+}
+
+//MARK: - UITableViewDelegate
+
+
+
+
+//MARK: - UITableViewDataSource
+extension WeatherMainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        7
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: DaysTempTableViewCell.identifier, for: indexPath) as! DaysTempTableViewCell
+    
+    if let model = weatherModel?.daily[indexPath.row] {
+        cell.cellConfig(model: model)
+    }
+    return cell
+    
     }
 }

@@ -11,10 +11,12 @@ struct WeatherResponce: Decodable {
     var name: String? = ""
     let current: Current
     let hourly: [Current]
+    let daily: [Daily]
     
     init() {
-        current = Current.init()
-        hourly = [Current.init()]
+        current = Current()
+        hourly = [Current()]
+        daily = [Daily()]
     }
 }
 
@@ -50,4 +52,17 @@ struct Weather: Decodable {
        }
 }
 
+struct Daily: Decodable {
+    let dt: Int
+    let temp: Temp
+    
+    init() {
+        dt = 0
+        temp = Temp(day: 0.0, night: 0.0)
+    }
+}
 
+struct Temp: Decodable {
+    var day: Double
+    var night: Double
+}

@@ -25,6 +25,8 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
         return formatter
     }()
     
+   
+    
     private var temperatueInfoLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -47,6 +49,8 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
     func getTimeFor(timestamp: Int) -> String {
         return timeFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
     }
+    
+    
     
     func cellConfig(model: Current) {
         let hour = getTimeFor(timestamp: model.dt)
