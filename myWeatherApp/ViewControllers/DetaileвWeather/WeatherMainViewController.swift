@@ -40,7 +40,7 @@ class WeatherMainViewController: UIViewController {
     
     private let tableViewWeatherDaysTemp: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemBlue
         tableView.separatorStyle = .none
         tableView.layer.cornerRadius = 15
         tableView.showsVerticalScrollIndicator = false

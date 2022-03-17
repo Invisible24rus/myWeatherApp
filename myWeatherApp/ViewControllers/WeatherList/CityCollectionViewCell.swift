@@ -11,8 +11,6 @@ class CityCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CityCollectionViewCell"
     
-    
-    
     private var weatherPropertiesLabel: UILabel = {
         let label = UILabel()
         label.text = ""

@@ -9,6 +9,8 @@ import UIKit
 
 class DaysTempTableViewCell: UITableViewCell {
     
+    static let identifier = "DaysTempTableViewCell"
+    
     private let nameWeekDayLabel: UILabel = {
         let label = UILabel()
         label.text = "PON"
@@ -16,6 +18,7 @@ class DaysTempTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
     }()
+    
     private let dailyTemperatureLabel: UILabel = {
         let label = UILabel()
         label.text = "15C"
@@ -23,6 +26,7 @@ class DaysTempTableViewCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
     }()
+    
     private let nightTemperature: UILabel = {
         let label = UILabel()
         label.text = "30C"
@@ -37,8 +41,6 @@ class DaysTempTableViewCell: UITableViewCell {
         return formatter
     }()
     
-    static let identifier = "DaysTempTableViewCell"
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setConstraints()

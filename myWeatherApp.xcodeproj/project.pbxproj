@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1136669027E31E1E00170349 /* CityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1136668F27E31E1E00170349 /* CityResponse.swift */; };
+		1136669227E3C4C100170349 /* CityNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1136669127E3C4C100170349 /* CityNameTableViewCell.swift */; };
 		114E8053279DD30B00C66CD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8052279DD30B00C66CD4 /* AppDelegate.swift */; };
 		114E8055279DD30B00C66CD4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8054279DD30B00C66CD4 /* SceneDelegate.swift */; };
 		114E8057279DD30B00C66CD4 /* WeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8056279DD30B00C66CD4 /* WeatherListViewController.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1136668F27E31E1E00170349 /* CityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityResponse.swift; sourceTree = "<group>"; };
+		1136669127E3C4C100170349 /* CityNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityNameTableViewCell.swift; sourceTree = "<group>"; };
 		114E804F279DD30B00C66CD4 /* myWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		114E8052279DD30B00C66CD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		114E8054279DD30B00C66CD4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				1157245127CBD4EB001E8B6D /* WeatherResponse.swift */,
+				1136668F27E31E1E00170349 /* CityResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 			children = (
 				114E8056279DD30B00C66CD4 /* WeatherListViewController.swift */,
 				116DA16927C6A98600D276B2 /* CityCollectionViewCell.swift */,
+				1136669127E3C4C100170349 /* CityNameTableViewCell.swift */,
 			);
 			path = WeatherList;
 			sourceTree = "<group>";
@@ -227,10 +233,12 @@
 				11D2829427DF9277005BB927 /* DaysTempTableViewCell.swift in Sources */,
 				1150D02127DE7DEB0056341D /* WeatherTempForecastCollectionViewCell.swift in Sources */,
 				114E8067279DD6C000C66CD4 /* UIView + Constraints.swift.swift in Sources */,
+				1136669027E31E1E00170349 /* CityResponse.swift in Sources */,
 				114E8057279DD30B00C66CD4 /* WeatherListViewController.swift in Sources */,
 				114E8053279DD30B00C66CD4 /* AppDelegate.swift in Sources */,
 				11D2828F27DF1C0F005BB927 /* String + Extensions.swift in Sources */,
 				1150D01C27DE40A90056341D /* AddCityAllert.swift in Sources */,
+				1136669227E3C4C100170349 /* CityNameTableViewCell.swift in Sources */,
 				1157244D27CBC3E0001E8B6D /* WeatherMainViewController.swift in Sources */,
 				114E8055279DD30B00C66CD4 /* SceneDelegate.swift in Sources */,
 				1157244F27CBCA1C001E8B6D /* NetworkService.swift in Sources */,
