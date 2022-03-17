@@ -37,6 +37,7 @@ class CityCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        isUserInteractionEnabled = false
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = contentView.frame.size.width / 15
         setConstraints()
@@ -51,6 +52,9 @@ class CityCollectionViewCell: UICollectionViewCell {
     func cellConfig(model: WeatherResponce) {
         temperatueInfoLabel.text = "\(Int(model.current.temp))°"
         cityInfoLabel.text = model.name?.firstUppercased
+        if cityInfoLabel.text != "" {
+            isUserInteractionEnabled = true
+        }
         weatherPropertiesLabel.text = model.current.weather.first?.weatherDescription.firstUppercased
     }
     

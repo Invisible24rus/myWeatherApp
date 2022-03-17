@@ -12,7 +12,7 @@ class WeatherListViewController: UIViewController {
     
     private let networkService = NetworkService()
     private var emptyCity = WeatherResponce()
-    private var citiesDefaultArray: [String] = ["Питер"]
+    private var citiesDefaultArray: [String] = ["Москва", "Питер"]
     private var cityResponceArray: [WeatherResponce] = []
     private var cityNameResponceArray: [[CityResponce]] = []
     
@@ -130,6 +130,8 @@ private extension WeatherListViewController {
         
         title = "Список городов"
         
+        view.backgroundColor = .systemGray5
+        
         tableViewCityName.backgroundColor = .systemGray5
         tableViewCityName.separatorStyle = .none
         
@@ -138,6 +140,8 @@ private extension WeatherListViewController {
 //        navigationItem.rightBarButtonItem = addCityButton
         
         navigationItem.searchController = weatherSearchController
+        navigationItem.backButtonTitle = ""
+        
         weatherSearchController.searchResultsUpdater = self
         weatherSearchController.searchBar.placeholder = "Поиск города"
         weatherSearchController.searchBar.setValue("Отмена", forKey: "cancelButtonText")
@@ -180,8 +184,6 @@ extension WeatherListViewController: UISearchResultsUpdating {
                     case let .success(responceCity):
                         self.cityNameResponceArray = []
                         self.cityNameResponceArray.append(responceCity)
-//                        print(self.cityNameResponce.first?.count)
-//                        print(self.cityNameResponce)
                         self.tableViewCityName.reloadData()
                     case let .failure(error):
                         print(error)
@@ -190,10 +192,7 @@ extension WeatherListViewController: UISearchResultsUpdating {
                 
             }
         }
-        
-//        print(text)
     }
-
 }
 
 //MARK: - UICollectionViewDelegate
@@ -213,14 +212,9 @@ extension WeatherListViewController: UICollectionViewDelegateFlowLayout {
         let cityWeather = cityResponceArray[indexPath.row]
         let weatherMainViewController = WeatherMainViewController()
         weatherMainViewController.weatherModel = cityWeather
-        navigationItem.backButtonTitle = ""
-//        navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(weatherMainViewController, animated: true)
     }
 }
-
-
-
 
 extension WeatherListViewController: UICollectionViewDataSource {
     
@@ -248,9 +242,11 @@ extension WeatherListViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: CityNameTableViewCell.identifier, for: indexPath) as! CityNameTableViewCell
         if let model = cityNameResponceArray.first?[indexPath.row] {
+            
             cell.cellConfig(model: model)
         }
         return cell
+        
     }
 }
 
