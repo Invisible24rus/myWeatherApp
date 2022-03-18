@@ -12,7 +12,7 @@ class WeatherListViewController: UIViewController {
     
     private let networkService = NetworkService()
     private var emptyCity = WeatherResponce()
-    private var citiesDefaultArray: [String] = ["Москва", "Питер"]
+    private var citiesDefaultArray: [String] = UserDefaults.standard.stringArray(forKey: "citiesList") ?? [String]()
     private var cityResponceArray: [WeatherResponce] = []
     private var cityNameResponceArray: [[CityResponce]] = []
     
@@ -92,6 +92,7 @@ class WeatherListViewController: UIViewController {
                     switch result {
                     case let .success(weatherResponce):
                         self.citiesDefaultArray.insert(city, at: 0)
+                        UserDefaults.standard.set(self.citiesDefaultArray, forKey: "citiesList")
                         self.cityResponceArray.insert(self.emptyCity, at: 0)
                         self.cityResponceArray[index] = weatherResponce
                         self.cityResponceArray[index].name = self.citiesDefaultArray[index]
@@ -103,17 +104,6 @@ class WeatherListViewController: UIViewController {
             }
         }
     }
-
-    @objc func pressPlusButton() {
-        addCityAllert(name: "", placeholder: "Введите город") { [weak self] (city) in
-            guard let self = self else { return }
-            self.getCityWeatherData(city: city, index: 0)
-        }
-    }
- 
-    
-    
-    
 }
 
 //MARK: - Private
@@ -242,7 +232,6 @@ extension WeatherListViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: CityNameTableViewCell.identifier, for: indexPath) as! CityNameTableViewCell
         if let model = cityNameResponceArray.first?[indexPath.row] {
-            
             cell.cellConfig(model: model)
         }
         return cell
