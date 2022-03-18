@@ -42,6 +42,7 @@ class WeatherMainViewController: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         tableView.layer.cornerRadius = 15
         tableView.showsVerticalScrollIndicator = false
         tableView.register(DaysTempTableViewCell.self, forCellReuseIdentifier: DaysTempTableViewCell.identifier)
@@ -207,15 +208,12 @@ extension WeatherMainViewController: UICollectionViewDelegateFlowLayout {
 //MARK: - UICollectionViewDataSource
 extension WeatherMainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        weatherModel?.hourly.count ?? 0
         24
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherTempForecastCollectionViewCell.identifier, for: indexPath) as! WeatherTempForecastCollectionViewCell
         if let model = weatherModel?.hourly[indexPath.row] {
-//            может проверить на isEmpty?
-            
             cell.cellConfig(model: model)
         }
         return cell

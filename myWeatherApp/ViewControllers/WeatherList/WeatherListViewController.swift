@@ -217,19 +217,19 @@ extension WeatherListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CityCollectionViewCell.identifier, for: indexPath) as! CityCollectionViewCell
         let model = cityResponceArray[indexPath.row]
         cell.cellConfig(model: model, indexPath: indexPath) { [weak self, weak cell] in
-                    guard let self = self,
-                          let cell = cell,
-                          let indexPath = self.collectionView.indexPath(for: cell) else { return }
-                    self.cityResponceArray.remove(at: indexPath.row)
-                    self.citiesDefaultArray.remove(at: indexPath.row)
+            guard let self = self,
+                  let cell = cell,
+                  let indexPath = self.collectionView.indexPath(for: cell) else { return }
+            self.cityResponceArray.remove(at: indexPath.row)
+            self.citiesDefaultArray.remove(at: indexPath.row)
             UserDefaults.standard.set(self.citiesDefaultArray, forKey: "citiesList")
-                    self.collectionView.deleteItems(at: [indexPath])
-                }
-       
-                return cell
-            }
+            self.collectionView.deleteItems(at: [indexPath])
+            
+        }
+        return cell
+    }
 }
-
+ 
 //MARK: - UITableViewDataSource
 extension WeatherListViewController: UITableViewDataSource {
     
@@ -247,7 +247,6 @@ extension WeatherListViewController: UITableViewDataSource {
         
     }
 }
-
 extension WeatherListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
