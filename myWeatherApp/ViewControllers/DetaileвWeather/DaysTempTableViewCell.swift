@@ -57,6 +57,7 @@ class DaysTempTableViewCell: UITableViewCell {
     
     func cellConfig(model: Daily) {
         let day = getDayFor(timestamp: model.dt)
+        print(day)
         nameWeekDayLabel.text = "\(day.firstUppercased)"
         dailyTemperatureLabel.text = "\(Int(model.temp.day))°"
         nightTemperature.text = "\(Int(model.temp.night))°"

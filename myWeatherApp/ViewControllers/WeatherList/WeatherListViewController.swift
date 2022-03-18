@@ -202,6 +202,7 @@ extension WeatherListViewController: UICollectionViewDelegateFlowLayout {
         let cityWeather = cityResponceArray[indexPath.row]
         let weatherMainViewController = WeatherMainViewController()
         weatherMainViewController.weatherModel = cityWeather
+        
         navigationController?.pushViewController(weatherMainViewController, animated: true)
     }
 }
@@ -215,9 +216,26 @@ extension WeatherListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CityCollectionViewCell.identifier, for: indexPath) as! CityCollectionViewCell
         let model = cityResponceArray[indexPath.row]
-        cell.cellConfig(model: model)
+        cell.cellConfig(model: model, indexPath: indexPath) {
+            
+            self.cityResponceArray.remove(at: indexPath.row)
+            self.citiesDefaultArray.remove(at: indexPath.row)
+            self.collectionView.deleteItems(at: [indexPath])
+            self.collectionView.reloadData()
+            
+        }
+        
         return cell
+        
     }
+    
+//    @objc func del(sender: UIButton) {
+//        let index = sender.tag
+//        collectionView.deleteItems(at: <#T##[IndexPath]#>)
+//        citiesDefaultArray.remove(at: index)
+//        collectionView.reloadData()
+//    }
+    
     
 }
 

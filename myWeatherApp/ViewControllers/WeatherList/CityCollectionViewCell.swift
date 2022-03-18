@@ -19,6 +19,15 @@ class CityCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    var deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("DEL", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.addTarget(self, action: #selector(del), for: .touchUpInside)
+        return button
+    }()
+    
     private var temperatueInfoLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -34,6 +43,8 @@ class CityCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 22.0)
         return label
     }()
+    
+    private var actionHandler: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,19 +58,32 @@ class CityCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+//    @objc func del(collectionView: UICollectionView, indexPath: IndexPath, array: [String]) {
+//        var array = array
+//        array.remove(at: indexPath.row)
+//        collectionView.deleteItems(at: [indexPath])
+//        collectionView.reloadData()
+//    }
     
     
-    func cellConfig(model: WeatherResponce) {
+    
+    func cellConfig(model: WeatherResponce, indexPath: IndexPath, actionHandler: @escaping () -> Void ) {
         temperatueInfoLabel.text = "\(Int(model.current.temp))°"
         cityInfoLabel.text = model.name?.firstUppercased
         if cityInfoLabel.text != "" {
             isUserInteractionEnabled = true
         }
         weatherPropertiesLabel.text = model.current.weather.first?.weatherDescription.firstUppercased
+        
+        self.actionHandler = actionHandler
+    }
+    
+    @objc func del() {
+        actionHandler?()
     }
     
     func setConstraints() {
-        contentView.addSubviewsForAutoLayout([weatherPropertiesLabel, temperatueInfoLabel, cityInfoLabel])
+        contentView.addSubviewsForAutoLayout([weatherPropertiesLabel, temperatueInfoLabel, cityInfoLabel, deleteButton])
         
         NSLayoutConstraint.activate([
             weatherPropertiesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
@@ -70,6 +94,9 @@ class CityCollectionViewCell: UICollectionViewCell {
             
             cityInfoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
             cityInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            
+            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
         ])
     }
 }
