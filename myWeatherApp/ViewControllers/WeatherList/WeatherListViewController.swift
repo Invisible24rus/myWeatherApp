@@ -116,11 +116,14 @@ class WeatherListViewController: UIViewController {
     
     @objc func pressPlusButton() {
         LocationManager.shared.getUserLocation { [weak self] location in
-            guard let self = self else { return }
-            fetchCityAndCountry(from: location) { city, error in
-                guard let city = city, error == nil else { return }
-                let locale = Locale.current
-                self.getCityWeatherData(city: city, index: 0)
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                LocationManager.shared.getLocationName(with: location) { [weak self] locationName in
+                    guard let cityName = locationName else { return }
+                    print(cityName)
+                    self?.getCityWeatherData(city: cityName, index: 0)
+                }
+                print(location.coordinate)
             }
         }
     }
@@ -137,7 +140,7 @@ private extension WeatherListViewController {
         
         view.bindSubviewsToBoundsView(collectionView)
         
-        let getCurrentUserLocationButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(pressPlusButton))
+        let getCurrentUserLocationButton = UIBarButtonItem(image: UIImage(systemName: "paperplane.fill"), style: .done, target: self, action: #selector(pressPlusButton))
         navigationItem.leftBarButtonItem = getCurrentUserLocationButton
         
         cityResponceArray = Array(repeating: emptyCity, count: citiesDefaultArray.count)
@@ -285,18 +288,4 @@ extension WeatherListViewController: UITableViewDelegate {
     }
 }
 
-//MARK: - CLLocationManagerDelegate
-
-//extension WeatherListViewController: CLLocationManagerDelegate {
-//
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let location: CLLocation = manager.location else { return }
-//        fetchCityAndCountry(from: location) { city, error in
-//            guard let city = city, error == nil else { return }
-//            print(city)
-//            let locale = Locale.current
-//            print(locale)
-//        }
-//    }
-//
-//}
+ 
