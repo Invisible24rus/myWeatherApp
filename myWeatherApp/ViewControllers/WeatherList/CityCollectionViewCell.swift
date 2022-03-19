@@ -58,15 +58,6 @@ class CityCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    @objc func del(collectionView: UICollectionView, indexPath: IndexPath, array: [String]) {
-//        var array = array
-//        array.remove(at: indexPath.row)
-//        collectionView.deleteItems(at: [indexPath])
-//        collectionView.reloadData()
-//    }
-    
-    
-    
     func cellConfig(model: WeatherResponce, indexPath: IndexPath, actionHandler: @escaping () -> Void ) {
         temperatueInfoLabel.text = "\(Int(model.current.temp))°"
         cityInfoLabel.text = model.name?.firstUppercased

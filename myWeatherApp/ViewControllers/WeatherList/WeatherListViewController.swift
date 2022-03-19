@@ -19,14 +19,6 @@ class WeatherListViewController: UIViewController {
     
     private let weatherSearchController = UISearchController(searchResultsController: nil)
     
-//    private let locationManager: CLLocationManager = {
-//        let locationManager = CLLocationManager()
-//        locationManager.requestWhenInUseAuthorization()
-//        return locationManager
-//    }()
-    
-    
-    
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -167,12 +159,6 @@ private extension WeatherListViewController {
             tableViewCityName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
             tableViewCityName.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -0),
         ])
-        
-//        if CLLocationManager.locationServicesEnabled() {
-//            locationManager.delegate = self
-//            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-//            locationManager.startUpdatingLocation()
-//        }
     }
 }
 
