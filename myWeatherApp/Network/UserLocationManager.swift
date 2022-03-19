@@ -21,11 +21,4 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         manager.delegate = self
         manager.startUpdatingLocation()
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else { return }
-        completion?(location)
-        manager.stopUpdatingLocation()
-    }
-    
 }

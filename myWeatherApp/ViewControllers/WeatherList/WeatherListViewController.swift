@@ -120,7 +120,6 @@ class WeatherListViewController: UIViewController {
             fetchCityAndCountry(from: location) { city, error in
                 guard let city = city, error == nil else { return }
                 let locale = Locale.current
-                
                 self.getCityWeatherData(city: city, index: 0)
             }
         }
