@@ -26,6 +26,7 @@
 		1157245927CBF66F001E8B6D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157245827CBF66F001E8B6D /* NetworkError.swift */; };
 		1157245B27CBFB8B001E8B6D /* URL + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157245A27CBFB8B001E8B6D /* URL + Extensions.swift */; };
 		116DA16A27C6A98600D276B2 /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116DA16927C6A98600D276B2 /* CityCollectionViewCell.swift */; };
+		11B4CE0927E614DD008A55AB /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4CE0827E614DD008A55AB /* UserLocationManager.swift */; };
 		11D2828F27DF1C0F005BB927 /* String + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D2828E27DF1C0F005BB927 /* String + Extensions.swift */; };
 		11D2829427DF9277005BB927 /* DaysTempTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D2829327DF9277005BB927 /* DaysTempTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		116DA16927C6A98600D276B2 /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
 		11B4CE0627E4A1CB008A55AB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		11B4CE0727E4A1CB008A55AB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		11B4CE0827E614DD008A55AB /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
 		11D2828E27DF1C0F005BB927 /* String + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extensions.swift"; sourceTree = "<group>"; };
 		11D2829327DF9277005BB927 /* DaysTempTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysTempTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 				1157244E27CBCA1C001E8B6D /* NetworkService.swift */,
 				1150D02227DE90790056341D /* GetCityCoordinate.swift */,
 				1157245827CBF66F001E8B6D /* NetworkError.swift */,
+				11B4CE0827E614DD008A55AB /* UserLocationManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			files = (
 				1150D02327DE90790056341D /* GetCityCoordinate.swift in Sources */,
 				116DA16A27C6A98600D276B2 /* CityCollectionViewCell.swift in Sources */,
+				11B4CE0927E614DD008A55AB /* UserLocationManager.swift in Sources */,
 				11D2829427DF9277005BB927 /* DaysTempTableViewCell.swift in Sources */,
 				1136669527E483D300170349 /* citiesListSettings.swift in Sources */,
 				1150D02127DE7DEB0056341D /* WeatherTempForecastCollectionViewCell.swift in Sources */,

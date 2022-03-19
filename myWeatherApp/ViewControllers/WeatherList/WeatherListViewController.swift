@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 class WeatherListViewController: UIViewController {
     
@@ -17,6 +18,14 @@ class WeatherListViewController: UIViewController {
     private var cityNameResponceArray: [[CityResponce]] = []
     
     private let weatherSearchController = UISearchController(searchResultsController: nil)
+    
+//    private let locationManager: CLLocationManager = {
+//        let locationManager = CLLocationManager()
+//        locationManager.requestWhenInUseAuthorization()
+//        return locationManager
+//    }()
+    
+    
     
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -104,6 +113,19 @@ class WeatherListViewController: UIViewController {
             }
         }
     }
+    
+    @objc func pressPlusButton() {
+        LocationManager.shared.getUserLocation { [weak self] location in
+            guard let self = self else { return }
+            fetchCityAndCountry(from: location) { city, error in
+                guard let city = city, error == nil else { return }
+                let locale = Locale.current
+                
+                self.getCityWeatherData(city: city, index: 0)
+            }
+        }
+    }
+    
 }
 
 //MARK: - Private
@@ -116,6 +138,9 @@ private extension WeatherListViewController {
         
         view.bindSubviewsToBoundsView(collectionView)
         
+        let getCurrentUserLocationButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(pressPlusButton))
+        navigationItem.leftBarButtonItem = getCurrentUserLocationButton
+        
         cityResponceArray = Array(repeating: emptyCity, count: citiesDefaultArray.count)
         
         title = "Список городов"
@@ -126,8 +151,6 @@ private extension WeatherListViewController {
         tableViewCityName.separatorStyle = .none
         
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24.0)]
-//        let addCityButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pressPlusButton))
-//        navigationItem.rightBarButtonItem = addCityButton
         
         navigationItem.searchController = weatherSearchController
         navigationItem.backButtonTitle = ""
@@ -142,6 +165,12 @@ private extension WeatherListViewController {
             tableViewCityName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
             tableViewCityName.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -0),
         ])
+        
+//        if CLLocationManager.locationServicesEnabled() {
+//            locationManager.delegate = self
+//            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+//            locationManager.startUpdatingLocation()
+//        }
     }
 }
 
@@ -256,3 +285,19 @@ extension WeatherListViewController: UITableViewDelegate {
         weatherSearchController.isActive = false
     }
 }
+
+//MARK: - CLLocationManagerDelegate
+
+//extension WeatherListViewController: CLLocationManagerDelegate {
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        guard let location: CLLocation = manager.location else { return }
+//        fetchCityAndCountry(from: location) { city, error in
+//            guard let city = city, error == nil else { return }
+//            print(city)
+//            let locale = Locale.current
+//            print(locale)
+//        }
+//    }
+//
+//}
