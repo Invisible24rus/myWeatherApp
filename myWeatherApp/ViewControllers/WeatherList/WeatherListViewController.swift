@@ -154,10 +154,10 @@ private extension WeatherListViewController {
         weatherSearchController.searchBar.setValue("Отмена", forKey: "cancelButtonText")
         
         NSLayoutConstraint.activate([
-            tableViewCityName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            tableViewCityName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            tableViewCityName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
-            tableViewCityName.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -0),
+            tableViewCityName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableViewCityName.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableViewCityName.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableViewCityName.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
 }
@@ -166,6 +166,8 @@ private extension WeatherListViewController {
 extension WeatherListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        
         if searchText == "" {
             tableViewCityName.isHidden = true
         } else {
