@@ -43,6 +43,7 @@ class WeatherMainViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
+        tableView.isUserInteractionEnabled = false
         tableView.layer.cornerRadius = 15
         tableView.showsVerticalScrollIndicator = false
         tableView.register(DaysTempTableViewCell.self, forCellReuseIdentifier: DaysTempTableViewCell.identifier)
