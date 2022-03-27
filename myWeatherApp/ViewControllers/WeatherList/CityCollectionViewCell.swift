@@ -15,15 +15,18 @@ class CityCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.textColor = .gray
-        label.font = UIFont.boldSystemFont(ofSize: 22.0)
+        label.numberOfLines = 2
+        label.sizeToFit()
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
         return label
     }()
     
-    var deleteButton: UIButton = {
+    private var deleteButton: UIButton = {
         let button = UIButton()
-        button.setTitle("DEL", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setImage(UIImage(systemName: "minus.circle"), for: .normal)
+        button.tintColor = .white
         button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(del), for: .touchUpInside)
         return button
     }()
@@ -40,7 +43,9 @@ class CityCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 22.0)
+        label.numberOfLines = 3
+        label.sizeToFit()
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
         return label
     }()
     
@@ -65,7 +70,7 @@ class CityCollectionViewCell: UICollectionViewCell {
             isUserInteractionEnabled = true
         }
         weatherPropertiesLabel.text = model.current.weather.first?.weatherDescription.firstUppercased
-        
+//        deleteButton.isHidden = true
         self.actionHandler = actionHandler
     }
     
@@ -77,17 +82,22 @@ class CityCollectionViewCell: UICollectionViewCell {
         contentView.addSubviewsForAutoLayout([weatherPropertiesLabel, temperatueInfoLabel, cityInfoLabel, deleteButton])
         
         NSLayoutConstraint.activate([
-            weatherPropertiesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
-            weatherPropertiesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
-            temperatueInfoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            weatherPropertiesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            weatherPropertiesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            weatherPropertiesLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+
+            temperatueInfoLabel.topAnchor.constraint(equalTo: weatherPropertiesLabel.bottomAnchor, constant: 10),
             temperatueInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
-            cityInfoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
+            cityInfoLabel.topAnchor.constraint(equalTo: temperatueInfoLabel.bottomAnchor, constant: 10),
             cityInfoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            cityInfoLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            deleteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -5),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 5),
+            deleteButton.heightAnchor.constraint(equalToConstant: 20),
+            deleteButton.widthAnchor.constraint(equalToConstant: 20),
         ])
     }
 }

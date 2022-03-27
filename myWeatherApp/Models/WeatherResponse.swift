@@ -12,11 +12,13 @@ struct WeatherResponce: Decodable {
     let current: Current
     let hourly: [Current]
     let daily: [Daily]
+    let timezone: String
     
     init() {
         current = Current()
         hourly = [Current()]
         daily = [Daily()]
+        timezone = ""
     }
 }
 

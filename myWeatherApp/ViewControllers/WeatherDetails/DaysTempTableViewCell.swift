@@ -67,13 +67,13 @@ class DaysTempTableViewCell: UITableViewCell {
         contentView.addSubviewsForAutoLayout([nameWeekDayLabel, dailyTemperatureLabel, nightTemperature])
         
         NSLayoutConstraint.activate([
-            nameWeekDayLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            nameWeekDayLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             nameWeekDayLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
-            dailyTemperatureLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            dailyTemperatureLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             dailyTemperatureLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            nightTemperature.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            nightTemperature.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             nightTemperature.trailingAnchor.constraint(equalTo: dailyTemperatureLabel.leadingAnchor, constant: -20),
         ])
     }

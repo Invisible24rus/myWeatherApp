@@ -13,7 +13,7 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
     
     private var weatherTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "1"
+        label.text = ""
         label.textColor = .systemBlue
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
@@ -36,7 +36,6 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        contentView.backgroundColor = .white
         setConstraints()
     }
     
@@ -45,12 +44,14 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
     }
     
     func getTimeFor(timestamp: Int) -> String {
+        
         return timeFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
     }
     
     
     
-    func cellConfig(model: Current) {
+    func cellConfig(model: Current, timeZone: String) {
+        timeFormatter.timeZone = TimeZone(identifier: "\(timeZone)")
         let hour = getTimeFor(timestamp: model.dt)
         weatherTimeLabel.text = "\(hour)"
         temperatueInfoLabel.text = "\(Int(model.temp))°"

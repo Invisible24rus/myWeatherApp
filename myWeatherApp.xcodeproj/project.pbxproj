@@ -137,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				11D2829127DF7F14005BB927 /* WeatherList */,
-				11D2829227DF7F23005BB927 /* DetaileвWeather */,
+				11D2829227DF7F23005BB927 /* WeatherDetails */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -152,14 +152,14 @@
 			path = WeatherList;
 			sourceTree = "<group>";
 		};
-		11D2829227DF7F23005BB927 /* DetaileвWeather */ = {
+		11D2829227DF7F23005BB927 /* WeatherDetails */ = {
 			isa = PBXGroup;
 			children = (
 				1157244C27CBC3E0001E8B6D /* WeatherMainViewController.swift */,
 				1150D02027DE7DEB0056341D /* WeatherTempForecastCollectionViewCell.swift */,
 				11D2829327DF9277005BB927 /* DaysTempTableViewCell.swift */,
 			);
-			path = "DetaileвWeather";
+			path = WeatherDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

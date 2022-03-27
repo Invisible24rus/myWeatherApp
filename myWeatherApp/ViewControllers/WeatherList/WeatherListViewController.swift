@@ -119,6 +119,10 @@ class WeatherListViewController: UIViewController {
             }
         }
     }
+//    Доделать скрывание кнопки
+    @objc func pressTrashButton(button: UIButton) {
+        print("Скрытие кнопки")
+    }
     
 }
 
@@ -134,6 +138,9 @@ private extension WeatherListViewController {
         
         let getCurrentUserLocationButton = UIBarButtonItem(image: UIImage(systemName: "paperplane.fill"), style: .done, target: self, action: #selector(pressPlusButton))
         navigationItem.leftBarButtonItem = getCurrentUserLocationButton
+        
+        let getEditCitiesListButton = UIBarButtonItem(image: UIImage(systemName: "trash.circle.fill"), style: .done, target: self, action: #selector(pressTrashButton))
+        navigationItem.rightBarButtonItem = getEditCitiesListButton
         
         cityResponceArray = Array(repeating: emptyCity, count: citiesDefaultArray.count)
         
@@ -213,14 +220,19 @@ extension WeatherListViewController: UICollectionViewDelegateFlowLayout {
         
         let itemsPerRow = 1
         let itemWidth = (collectionView.frame.width - layout.sectionInset.left - layout.sectionInset.right) / CGFloat(itemsPerRow)
-        let itemHeight = itemWidth - 100
+        var itemHeight = itemWidth - 100
+        if view.bounds.height < 600 {
+            itemHeight = itemWidth
+        }
         return CGSize(width: itemWidth, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cityWeather = cityResponceArray[indexPath.row]
+        let timeZone = cityResponceArray[indexPath.row].timezone
         let weatherMainViewController = WeatherMainViewController()
         weatherMainViewController.weatherModel = cityWeather
+        weatherMainViewController.timeZone = timeZone
         
         navigationController?.pushViewController(weatherMainViewController, animated: true)
     }
@@ -243,7 +255,6 @@ extension WeatherListViewController: UICollectionViewDataSource {
             self.citiesDefaultArray.remove(at: indexPath.row)
             UserDefaults.standard.set(self.citiesDefaultArray, forKey: "citiesList")
             self.collectionView.deleteItems(at: [indexPath])
-            
         }
         return cell
     }
