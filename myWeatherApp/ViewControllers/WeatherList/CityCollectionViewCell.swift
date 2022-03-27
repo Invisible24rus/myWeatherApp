@@ -21,7 +21,7 @@ class CityCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private var deleteButton: UIButton = {
+    private lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "minus.circle"), for: .normal)
         button.tintColor = .white
