@@ -181,6 +181,10 @@ extension WeatherListViewController: UISearchBarDelegate {
             tableViewCityName.isHidden = false
         }
     }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        tableViewCityName.isHidden = true
+    }
 }
 
 
