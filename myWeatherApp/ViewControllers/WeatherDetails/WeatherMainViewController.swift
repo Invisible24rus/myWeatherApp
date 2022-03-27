@@ -152,7 +152,7 @@ private extension WeatherMainViewController {
         view.addSubviewsForAutoLayout([weatherHumidityLabel, weatherHumidityValueLabel, cardWeatherView, collectionViewWeatherHourlyTemp, windSpeedLabel, windSpeedValueLabel, tableViewWeatherDaysTemp])
         cardWeatherView.addSubviewsForAutoLayout([cityNameLabel, weatherInfoLabel, weatherTemperatureLabel, welcomeLabel])
         
-        
+        title = "Подробности"
         
         contentView.backgroundColor = .systemGray5
         view.backgroundColor = .systemGray5
