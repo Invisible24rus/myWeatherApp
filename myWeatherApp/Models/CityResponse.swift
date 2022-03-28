@@ -8,6 +8,7 @@
 import Foundation
 
 struct CityResponce: Decodable {
+    let name: String
     let localizedName: String
 }
 

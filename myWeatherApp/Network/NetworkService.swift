@@ -23,7 +23,8 @@ class NetworkService {
                                     "exclude": "minutely,alerts",
                                     "appid": apiKey,
                                     "units": "metric",
-                                    "lang": "ru"]
+                                    "lang": NSLocalizedString("weatherLanguage", comment: "")]
+//        РУ МЕТРИК РУ, ЕН ИМПЕРИАЛ ЕН
         guard let url = URL.url(with: baseURL, endpoint: method, queryParams: parameters) else {
             completion(.failure(.badURL))
             return
@@ -61,7 +62,7 @@ class NetworkService {
         let data = Data(str.utf8)
         let hexString = data.map{ String(format:"%02x", $0) }.joined(separator: "%")
 
-        let request = NSMutableURLRequest(url: NSURL(string: "https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&language=%20ru&country=RU&q=%\(hexString)&type=CITY")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string: "https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&language=%20ru&country=RU,US&q=%\(hexString)&type=CITY")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
         

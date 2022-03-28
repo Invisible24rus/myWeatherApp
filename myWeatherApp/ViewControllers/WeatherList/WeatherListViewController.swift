@@ -144,7 +144,7 @@ private extension WeatherListViewController {
         
         cityResponceArray = Array(repeating: emptyCity, count: citiesDefaultArray.count)
         
-        title = "Список городов"
+        title = NSLocalizedString("titleWeatherList", comment: "")
         
         view.backgroundColor = .systemGray5
         
@@ -157,8 +157,8 @@ private extension WeatherListViewController {
         navigationItem.backButtonTitle = ""
         
         weatherSearchController.searchResultsUpdater = self
-        weatherSearchController.searchBar.placeholder = "Поиск города"
-        weatherSearchController.searchBar.setValue("Отмена", forKey: "cancelButtonText")
+        weatherSearchController.searchBar.placeholder = NSLocalizedString("searchBarTitle", comment: "")
+        weatherSearchController.searchBar.setValue(NSLocalizedString("searchBarCancelButton", comment: ""), forKey: "cancelButtonText")
         
         NSLayoutConstraint.activate([
             tableViewCityName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -285,7 +285,12 @@ extension WeatherListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let city = (cityNameResponceArray.first?[indexPath.row]) else { return }
-        getCityWeatherData(city: city.localizedName, index: 0)
+        
+        if Locale.current.languageCode == "ru" {
+            getCityWeatherData(city: city.localizedName, index: 0)
+        } else {
+            getCityWeatherData(city: city.name, index: 0)
+        }
         tableViewCityName.isHidden = true
         weatherSearchController.isActive = false
     }

@@ -15,7 +15,7 @@ class WeatherMainViewController: UIViewController {
     
     private lazy var timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:MM a"
+        formatter.dateFormat = "HH:mm a"
         return formatter
     }()
 
@@ -55,7 +55,7 @@ class WeatherMainViewController: UIViewController {
     
     private let weatherHumidityLabel: UILabel = {
         let label = UILabel()
-        label.text = "Влажность"
+        label.text = NSLocalizedString("humidity", comment: "")
         label.font = UIFont.boldSystemFont(ofSize: 24.0)
         label.textColor = .black
         label.numberOfLines = 2
@@ -67,7 +67,7 @@ class WeatherMainViewController: UIViewController {
     
     private var windSpeedLabel: UILabel = {
         let label = UILabel()
-        label.text = "Скорость ветра"
+        label.text = NSLocalizedString("windSpeed", comment: "")
         label.font = UIFont.boldSystemFont(ofSize: 24.0)
         label.textColor = .black
         label.numberOfLines = 2
@@ -131,7 +131,7 @@ class WeatherMainViewController: UIViewController {
             weatherInfoLabel.text = weatherModel.current.weather.first?.weatherDescription.firstUppercased
             welcomeLabel.text = "\(time)"
             weatherHumidityValueLabel.text = "\(Int(weatherModel.current.humidity))%"
-            windSpeedValueLabel.text = "\(Int(weatherModel.current.windSpeed)) м/с"
+            windSpeedValueLabel.text = "\(Int(weatherModel.current.windSpeed)) \(NSLocalizedString("metersPerSecond", comment: ""))"
         } else {
             return
         }
@@ -152,7 +152,7 @@ private extension WeatherMainViewController {
         view.addSubviewsForAutoLayout([weatherHumidityLabel, weatherHumidityValueLabel, cardWeatherView, collectionViewWeatherHourlyTemp, windSpeedLabel, windSpeedValueLabel, tableViewWeatherDaysTemp])
         cardWeatherView.addSubviewsForAutoLayout([cityNameLabel, weatherInfoLabel, weatherTemperatureLabel, welcomeLabel])
         
-        title = "Подробности"
+        title = NSLocalizedString("details", comment: "")
         
         contentView.backgroundColor = .systemGray5
         view.backgroundColor = .systemGray5
@@ -170,7 +170,7 @@ private extension WeatherMainViewController {
         windSpeedValueLabel.textColor = .black
         windSpeedValueLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         
-        welcomeLabel.text = "XXX"
+        welcomeLabel.text = ""
         welcomeLabel.textColor = .systemBlue
         welcomeLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         
