@@ -61,9 +61,9 @@ class NetworkService {
         let data = Data(str.utf8)
         let hexString = data.map{ String(format:"%02x", $0) }.joined(separator: "%")
 
-        let request = NSMutableURLRequest(url: NSURL(string: "https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&language=%20ru&country=RU,US&q=%\(hexString)&type=CITY")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 10.0)
+        guard let url = NSURL(string: "https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&language=%20ru&country=RU,US&q=%\(hexString)&type=CITY") else { return }
+        
+        let request = NSMutableURLRequest(url: url as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
         
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
