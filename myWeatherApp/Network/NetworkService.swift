@@ -24,7 +24,6 @@ class NetworkService {
                                     "appid": apiKey,
                                     "units": "metric",
                                     "lang": NSLocalizedString("weatherLanguage", comment: "")]
-//        РУ МЕТРИК РУ, ЕН ИМПЕРИАЛ ЕН
         guard let url = URL.url(with: baseURL, endpoint: method, queryParams: parameters) else {
             completion(.failure(.badURL))
             return

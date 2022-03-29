@@ -16,6 +16,7 @@ class WeatherListViewController: UIViewController {
     private var citiesDefaultArray: [String] = UserDefaults.standard.stringArray(forKey: "citiesList") ?? [String]()
     private var cityResponceArray: [WeatherResponce] = []
     private var cityNameResponceArray: [[CityResponce]] = []
+    private var isOffDelete = true
     
     private let weatherSearchController = UISearchController(searchResultsController: nil)
     
@@ -120,8 +121,9 @@ class WeatherListViewController: UIViewController {
         }
     }
 //    Доделать скрывание кнопки
-    @objc func pressTrashButton(button: UIButton) {
-        print("Скрытие кнопки")
+    @objc func pressTrashButton() {
+        isOffDelete = !isOffDelete
+        collectionView.reloadData()
     }
     
 }
@@ -141,6 +143,8 @@ private extension WeatherListViewController {
         
         let getEditCitiesListButton = UIBarButtonItem(image: UIImage(systemName: "trash.circle.fill"), style: .done, target: self, action: #selector(pressTrashButton))
         navigationItem.rightBarButtonItem = getEditCitiesListButton
+        
+
         
         cityResponceArray = Array(repeating: emptyCity, count: citiesDefaultArray.count)
         
@@ -260,7 +264,9 @@ extension WeatherListViewController: UICollectionViewDataSource {
             UserDefaults.standard.set(self.citiesDefaultArray, forKey: "citiesList")
             self.collectionView.deleteItems(at: [indexPath])
         }
+        cell.deleteButton.isHidden = isOffDelete
         return cell
+        
     }
 }
  

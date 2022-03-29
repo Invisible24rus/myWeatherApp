@@ -31,7 +31,6 @@ class CityNameTableViewCell: UITableViewCell {
     
     func cellConfig(model: CityResponce) {
         contentView.backgroundColor = .systemGray5
-//        РУ - localizedName, ЕН - name
         if Locale.current.languageCode == "ru" {
             nameCityLabel.text = model.localizedName.firstUppercased
         } else {

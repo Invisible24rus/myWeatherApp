@@ -21,7 +21,7 @@ class CityCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var deleteButton: UIButton = {
+    lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "minus.circle"), for: .normal)
         button.tintColor = .white
@@ -63,15 +63,15 @@ class CityCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func cellConfig(model: WeatherResponce, indexPath: IndexPath, actionHandler: @escaping () -> Void ) {
+    func cellConfig(model: WeatherResponce, indexPath: IndexPath, actionHandler: @escaping () -> Void) {
         temperatueInfoLabel.text = "\(Int(model.current.temp))°"
         cityInfoLabel.text = model.name?.firstUppercased
         if cityInfoLabel.text != "" {
             isUserInteractionEnabled = true
         }
         weatherPropertiesLabel.text = model.current.weather.first?.weatherDescription.firstUppercased
-//        deleteButton.isHidden = true
         self.actionHandler = actionHandler
+        deleteButton.isHidden = true
     }
     
     @objc func del() {
