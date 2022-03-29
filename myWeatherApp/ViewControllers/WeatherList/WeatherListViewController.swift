@@ -177,13 +177,7 @@ private extension WeatherListViewController {
 extension WeatherListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        
-        if searchText == "" {
-            tableViewCityName.isHidden = true
-        } else {
-            tableViewCityName.isHidden = false
-        }
+        tableViewCityName.isHidden = searchText.isEmpty
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {

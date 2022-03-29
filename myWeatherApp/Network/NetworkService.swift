@@ -54,7 +54,7 @@ class NetworkService {
         
         let headers = [
             "x-rapidapi-host": "spott.p.rapidapi.com",
-            "x-rapidapi-key": "6b85dd40fcmsha8ea181cba0213dp19a5d4jsnd6b2fd8ab9bb"
+            "x-rapidapi-key": "86ee56f721msh8a4c597f0c723e3p11d10ajsnb182c629daf7"
         ]
         
         let str = cityNameString
