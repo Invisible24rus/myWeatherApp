@@ -13,7 +13,7 @@ class DaysTempTableViewCell: UITableViewCell {
     
     private let nameWeekDayLabel: UILabel = {
         let label = UILabel()
-        label.text = "PON"
+        label.text = ""
         label.textColor = .darkGray
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
@@ -21,7 +21,7 @@ class DaysTempTableViewCell: UITableViewCell {
     
     private let dailyTemperatureLabel: UILabel = {
         let label = UILabel()
-        label.text = "15C"
+        label.text = ""
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label
@@ -29,7 +29,7 @@ class DaysTempTableViewCell: UITableViewCell {
     
     private let nightTemperature: UILabel = {
         let label = UILabel()
-        label.text = "30C"
+        label.text = ""
         label.textColor = .systemGray
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         return label

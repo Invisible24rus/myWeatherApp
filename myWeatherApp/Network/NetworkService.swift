@@ -37,7 +37,7 @@ class NetworkService {
                   }
             
             guard let data = data,
-                  let jsonString = String(data: data, encoding: .utf8),
+//                  let jsonString = String(data: data, encoding: .utf8),
                   let model = try? JSONDecoder().decode(WeatherResponce.self, from: data) else {
                       completion(.failure(.badJSON))
                       return
@@ -76,7 +76,7 @@ class NetworkService {
                   }
             
             guard let data = data,
-                  let jsonString = String(data: data, encoding: .utf8),
+//                  let jsonString = String(data: data, encoding: .utf8),
                   let model = try? JSONDecoder().decode([CityResponce].self, from: data) else {
                       completion(.failure(.badJSON))
                       return

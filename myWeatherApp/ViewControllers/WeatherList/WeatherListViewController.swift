@@ -11,8 +11,8 @@ import MapKit
 
 class WeatherListViewController: UIViewController {
     
-    private let viewModel = WeatherListViewModel()
-    private let networkService = NetworkService()
+    private let viewModel: WeatherListViewModel
+    private let networkService: NetworkService
     private var emptyCity = WeatherResponce()
     private var citiesDefaultArray: [String] = UserDefaults.standard.stringArray(forKey: "citiesList") ?? [String]()
     private var cityResponceArray: [WeatherResponce] = []
@@ -40,6 +40,16 @@ class WeatherListViewController: UIViewController {
         return tableView
     }()
     
+    init(viewModel: WeatherListViewModel, networkService: NetworkService) {
+        self.viewModel = viewModel
+        self.networkService = networkService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +62,6 @@ class WeatherListViewController: UIViewController {
         getCityWeatherCell()
         
     }
-//
-//    func stringToHex(string: String) -> String {
-//        let data = Data(string.utf8)
-//        let hexString = data.map{ String(format:"%02x", $0) }.joined(separator: "%")
-//        return hexString
-//    }
     
     func getCityWeatherCell() {
         for (index, city) in citiesDefaultArray.enumerated() {
@@ -81,8 +85,6 @@ class WeatherListViewController: UIViewController {
             }
         }
     }
-    
-   
     
     func getCityWeatherData(city: String, index: Int) {
 
@@ -186,7 +188,6 @@ extension WeatherListViewController: UISearchBarDelegate {
     }
 }
 
-
 //MARK: - UISearchResultsUpdating
 
 extension WeatherListViewController: UISearchResultsUpdating {
@@ -261,7 +262,6 @@ extension WeatherListViewController: UICollectionViewDataSource {
         }
         cell.deleteButton.isHidden = isOffDelete
         return cell
-        
     }
 }
  
@@ -282,6 +282,7 @@ extension WeatherListViewController: UITableViewDataSource {
         
     }
 }
+
 extension WeatherListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
