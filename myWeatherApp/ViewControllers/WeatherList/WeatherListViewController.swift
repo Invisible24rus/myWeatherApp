@@ -11,8 +11,8 @@ import MapKit
 
 class WeatherListViewController: UIViewController {
     
-    private let viewModel: WeatherListViewModel
-    private let networkService: NetworkService
+    private let viewModel = WeatherListViewModel()
+    private let networkService = NetworkService()
     private var emptyCity = WeatherResponce()
     private var citiesDefaultArray: [String] = UserDefaults.standard.stringArray(forKey: "citiesList") ?? [String]()
     private var cityResponceArray: [WeatherResponce] = []
@@ -40,17 +40,6 @@ class WeatherListViewController: UIViewController {
         return tableView
     }()
     
-    init(viewModel: WeatherListViewModel, networkService: NetworkService) {
-        self.viewModel = viewModel
-        self.networkService = networkService
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
