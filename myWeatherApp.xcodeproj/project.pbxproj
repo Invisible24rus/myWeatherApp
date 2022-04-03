@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11295EFD27F9BA4D008464E3 /* WeatherListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11295EFC27F9BA4D008464E3 /* WeatherListViewModel.swift */; };
 		1136669027E31E1E00170349 /* CityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1136668F27E31E1E00170349 /* CityResponse.swift */; };
 		1136669227E3C4C100170349 /* CityNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1136669127E3C4C100170349 /* CityNameTableViewCell.swift */; };
 		114E8053279DD30B00C66CD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114E8052279DD30B00C66CD4 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11295EFC27F9BA4D008464E3 /* WeatherListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListViewModel.swift; sourceTree = "<group>"; };
 		1136668F27E31E1E00170349 /* CityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityResponse.swift; sourceTree = "<group>"; };
 		1136669127E3C4C100170349 /* CityNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityNameTableViewCell.swift; sourceTree = "<group>"; };
 		114E804F279DD30B00C66CD4 /* myWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +72,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11295EFA27F9B67F008464E3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				114E8052279DD30B00C66CD4 /* AppDelegate.swift */,
+				114E8054279DD30B00C66CD4 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		11295EFB27F9B690008464E3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				114E8058279DD30B00C66CD4 /* Main.storyboard */,
+				114E805B279DD30C00C66CD4 /* Assets.xcassets */,
+				114E805D279DD30C00C66CD4 /* LaunchScreen.storyboard */,
+				114E8060279DD30C00C66CD4 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		11295EFE27F9BA8C008464E3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				116DA16927C6A98600D276B2 /* CityCollectionViewCell.swift */,
+				1136669127E3C4C100170349 /* CityNameTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		11295EFF27F9BA9E008464E3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1150D02027DE7DEB0056341D /* WeatherTempForecastCollectionViewCell.swift */,
+				11D2829327DF9277005BB927 /* DaysTempTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		114E8046279DD30B00C66CD4 = {
 			isa = PBXGroup;
 			children = (
@@ -90,16 +130,12 @@
 			isa = PBXGroup;
 			children = (
 				11D72DCB27F22908003C387D /* Localization */,
+				11295EFB27F9B690008464E3 /* Resources */,
+				11295EFA27F9B67F008464E3 /* Application */,
 				114E8068279DDB5D00C66CD4 /* Extensions */,
 				114E8069279DDFF000C66CD4 /* Models */,
 				1157245027CBD4C6001E8B6D /* Network */,
 				11D2829027DF7EFE005BB927 /* ViewControllers */,
-				114E8052279DD30B00C66CD4 /* AppDelegate.swift */,
-				114E8054279DD30B00C66CD4 /* SceneDelegate.swift */,
-				114E8058279DD30B00C66CD4 /* Main.storyboard */,
-				114E805B279DD30C00C66CD4 /* Assets.xcassets */,
-				114E805D279DD30C00C66CD4 /* LaunchScreen.storyboard */,
-				114E8060279DD30C00C66CD4 /* Info.plist */,
 			);
 			path = myWeatherApp;
 			sourceTree = "<group>";
@@ -127,8 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				1157244E27CBCA1C001E8B6D /* NetworkService.swift */,
-				1150D02227DE90790056341D /* GetCityCoordinate.swift */,
 				1157245827CBF66F001E8B6D /* NetworkError.swift */,
+				1150D02227DE90790056341D /* GetCityCoordinate.swift */,
 				11B4CE0827E614DD008A55AB /* UserLocationManager.swift */,
 			);
 			path = Network;
@@ -146,9 +182,9 @@
 		11D2829127DF7F14005BB927 /* WeatherList */ = {
 			isa = PBXGroup;
 			children = (
+				11295EFE27F9BA8C008464E3 /* Cell */,
+				11295EFC27F9BA4D008464E3 /* WeatherListViewModel.swift */,
 				114E8056279DD30B00C66CD4 /* WeatherListViewController.swift */,
-				116DA16927C6A98600D276B2 /* CityCollectionViewCell.swift */,
-				1136669127E3C4C100170349 /* CityNameTableViewCell.swift */,
 			);
 			path = WeatherList;
 			sourceTree = "<group>";
@@ -156,9 +192,8 @@
 		11D2829227DF7F23005BB927 /* WeatherDetails */ = {
 			isa = PBXGroup;
 			children = (
+				11295EFF27F9BA9E008464E3 /* Cell */,
 				1157244C27CBC3E0001E8B6D /* WeatherMainViewController.swift */,
-				1150D02027DE7DEB0056341D /* WeatherTempForecastCollectionViewCell.swift */,
-				11D2829327DF9277005BB927 /* DaysTempTableViewCell.swift */,
 			);
 			path = WeatherDetails;
 			sourceTree = "<group>";
@@ -253,6 +288,7 @@
 				1136669027E31E1E00170349 /* CityResponse.swift in Sources */,
 				114E8057279DD30B00C66CD4 /* WeatherListViewController.swift in Sources */,
 				114E8053279DD30B00C66CD4 /* AppDelegate.swift in Sources */,
+				11295EFD27F9BA4D008464E3 /* WeatherListViewModel.swift in Sources */,
 				11D2828F27DF1C0F005BB927 /* String + Extensions.swift in Sources */,
 				1136669227E3C4C100170349 /* CityNameTableViewCell.swift in Sources */,
 				1157244D27CBC3E0001E8B6D /* WeatherMainViewController.swift in Sources */,
@@ -423,7 +459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = myWeatherApp/Info.plist;
+				INFOPLIST_FILE = myWeatherApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -451,7 +487,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = myWeatherApp/Info.plist;
+				INFOPLIST_FILE = myWeatherApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

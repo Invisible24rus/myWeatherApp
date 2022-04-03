@@ -11,6 +11,7 @@ import MapKit
 
 class WeatherListViewController: UIViewController {
     
+    private let viewModel = WeatherListViewModel()
     private let networkService = NetworkService()
     private var emptyCity = WeatherResponce()
     private var citiesDefaultArray: [String] = UserDefaults.standard.stringArray(forKey: "citiesList") ?? [String]()
@@ -48,15 +49,15 @@ class WeatherListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         weatherSearchController.searchBar.delegate = self
-        getCityWeatherCell()
+        viewModel.getCityWeatherCell()
         
     }
-    
-    func stringToHex(string: String) -> String {
-        let data = Data(string.utf8)
-        let hexString = data.map{ String(format:"%02x", $0) }.joined(separator: "%")
-        return hexString
-    }
+//
+//    func stringToHex(string: String) -> String {
+//        let data = Data(string.utf8)
+//        let hexString = data.map{ String(format:"%02x", $0) }.joined(separator: "%")
+//        return hexString
+//    }
     
     func getCityWeatherCell() {
         for (index, city) in citiesDefaultArray.enumerated() {
@@ -120,7 +121,7 @@ class WeatherListViewController: UIViewController {
             }
         }
     }
-//    Доделать скрывание кнопки
+    
     @objc func pressTrashButton() {
         isOffDelete = !isOffDelete
         collectionView.reloadData()
@@ -291,6 +292,7 @@ extension WeatherListViewController: UITableViewDelegate {
         } else {
             getCityWeatherData(city: city.name, index: 0)
         }
+        
         tableViewCityName.isHidden = true
         weatherSearchController.isActive = false
     }

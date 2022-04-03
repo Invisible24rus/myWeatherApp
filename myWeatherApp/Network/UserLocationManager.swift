@@ -35,7 +35,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                 completion(nil)
                 return
             }
-            
             let city = place.locality
             completion(city)
         }
