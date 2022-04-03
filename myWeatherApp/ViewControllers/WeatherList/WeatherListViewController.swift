@@ -117,7 +117,6 @@ class WeatherListViewController: UIViewController {
         isOffDelete = !isOffDelete
         collectionView.reloadData()
     }
-    
 }
 
 //MARK: - Private
@@ -135,8 +134,6 @@ private extension WeatherListViewController {
         
         let getEditCitiesListButton = UIBarButtonItem(image: UIImage(systemName: "trash.circle.fill"), style: .done, target: self, action: #selector(pressTrashButton))
         navigationItem.rightBarButtonItem = getEditCitiesListButton
-        
-
         
         cityResponceArray = Array(repeating: emptyCity, count: citiesDefaultArray.count)
         
@@ -226,7 +223,6 @@ extension WeatherListViewController: UICollectionViewDelegateFlowLayout {
         let weatherMainViewController = WeatherMainViewController()
         weatherMainViewController.weatherModel = cityWeather
         weatherMainViewController.timeZone = timeZone
-        
         navigationController?.pushViewController(weatherMainViewController, animated: true)
     }
 }
