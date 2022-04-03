@@ -49,7 +49,7 @@ class WeatherListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         weatherSearchController.searchBar.delegate = self
-        viewModel.getCityWeatherCell()
+        getCityWeatherCell()
         
     }
 //
