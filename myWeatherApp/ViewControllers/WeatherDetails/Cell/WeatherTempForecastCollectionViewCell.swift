@@ -33,6 +33,14 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let iconWeather: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.tintColor = .black
+        image.layer.cornerRadius = 10
+        return image
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,7 +52,6 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
     }
     
     func getTimeFor(timestamp: Int) -> String {
-        
         return timeFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
     }
     
@@ -55,10 +62,12 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
         let hour = getTimeFor(timestamp: model.dt)
         weatherTimeLabel.text = "\(hour)"
         temperatueInfoLabel.text = "\(Int(model.temp))°"
+        let icon = getWeatherIcon(icon: model.weather.first?.icon ?? "01d")
+        iconWeather.image = UIImage(systemName: icon)
     }
     
     func setConstraints() {
-        contentView.addSubviewsForAutoLayout([weatherTimeLabel, temperatueInfoLabel])
+        contentView.addSubviewsForAutoLayout([weatherTimeLabel, temperatueInfoLabel, iconWeather])
         
         NSLayoutConstraint.activate([
             weatherTimeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
@@ -66,6 +75,9 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
             
             temperatueInfoLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             temperatueInfoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            
+            iconWeather.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            iconWeather.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
     

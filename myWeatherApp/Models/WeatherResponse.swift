@@ -39,28 +39,22 @@ struct Current: Decodable {
     
     init() {
         dt = 0
-        weather = [Weather(weatherDescription: "")]
+        weather = [Weather(weatherDescription: "", icon: "01d")]
         humidity = 0
         windSpeed = 0.0
         temp = 0.0
     }
 }
 
-struct Weather: Decodable {
-    let weatherDescription: String
-    
-    enum CodingKeys: String, CodingKey {
-        case weatherDescription = "description"
-       }
-}
-
 struct Daily: Decodable {
     let dt: Int
     let temp: Temp
+    let weather: [Weather]
     
     init() {
         dt = 0
         temp = Temp(day: 0.0, night: 0.0)
+        weather = [Weather(weatherDescription: "", icon: "01d")]
     }
 }
 
@@ -68,3 +62,15 @@ struct Temp: Decodable {
     var day: Double
     var night: Double
 }
+
+
+struct Weather: Decodable {
+    let weatherDescription: String
+    let icon: String
+    
+    enum CodingKeys: String, CodingKey {
+        case weatherDescription = "description"
+        case icon
+       }
+}
+

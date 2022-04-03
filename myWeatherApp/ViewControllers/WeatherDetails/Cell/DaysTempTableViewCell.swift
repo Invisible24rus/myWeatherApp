@@ -41,6 +41,14 @@ class DaysTempTableViewCell: UITableViewCell {
         return formatter
     }()
     
+    private let iconWeather: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFit
+        image.tintColor = .black
+        image.layer.cornerRadius = 10
+        return image
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -61,10 +69,12 @@ class DaysTempTableViewCell: UITableViewCell {
         nameWeekDayLabel.text = "\(day.firstUppercased)"
         dailyTemperatureLabel.text = "\(Int(model.temp.day))°"
         nightTemperature.text = "\(Int(model.temp.night))°"
+        let icon = getWeatherIcon(icon: model.weather.first?.icon ?? "01d")
+        iconWeather.image = UIImage(systemName: icon)
     }
     
     func setConstraints() {
-        contentView.addSubviewsForAutoLayout([nameWeekDayLabel, dailyTemperatureLabel, nightTemperature])
+        contentView.addSubviewsForAutoLayout([nameWeekDayLabel, dailyTemperatureLabel, nightTemperature, iconWeather])
         
         NSLayoutConstraint.activate([
             nameWeekDayLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
@@ -74,7 +84,10 @@ class DaysTempTableViewCell: UITableViewCell {
             dailyTemperatureLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             nightTemperature.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            nightTemperature.trailingAnchor.constraint(equalTo: dailyTemperatureLabel.leadingAnchor, constant: -20),
+            nightTemperature.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -60),
+            
+            iconWeather.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            iconWeather.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -100),
         ])
     }
     

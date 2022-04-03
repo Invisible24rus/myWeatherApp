@@ -67,7 +67,7 @@ class WeatherMainViewController: UIViewController {
         let label = UILabel()
         label.text = ""
         label.font = UIFont.boldSystemFont(ofSize: 24.0)
-        label.textColor = .systemBlue
+        label.textColor = .black
         return label
     }()
 
