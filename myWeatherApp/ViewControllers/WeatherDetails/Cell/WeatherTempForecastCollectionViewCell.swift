@@ -41,7 +41,6 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
@@ -54,15 +53,13 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
     func getTimeFor(timestamp: Int) -> String {
         return timeFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
     }
-    
-    
-    
+
     func cellConfig(model: Current, timeZone: String) {
         timeFormatter.timeZone = TimeZone(identifier: "\(timeZone)")
         let hour = getTimeFor(timestamp: model.dt)
         weatherTimeLabel.text = "\(hour)"
         temperatueInfoLabel.text = "\(Int(model.temp))°"
-        let icon = getWeatherIcon(icon: model.weather.first?.icon ?? "01d")
+        guard let icon = model.weather.first?.getWeatherIcon() else { return }
         iconWeather.image = UIImage(systemName: icon)
     }
     
@@ -80,5 +77,4 @@ class WeatherTempForecastCollectionViewCell: UICollectionViewCell {
             iconWeather.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
     }
-    
 }

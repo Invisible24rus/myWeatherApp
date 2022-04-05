@@ -51,9 +51,7 @@ class DaysTempTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -69,7 +67,7 @@ class DaysTempTableViewCell: UITableViewCell {
         nameWeekDayLabel.text = "\(day.firstUppercased)"
         dailyTemperatureLabel.text = "\(Int(model.temp.day))°"
         nightTemperature.text = "\(Int(model.temp.night))°"
-        let icon = getWeatherIcon(icon: model.weather.first?.icon ?? "01d")
+        guard let icon = model.weather.first?.getWeatherIcon() else { return }
         iconWeather.image = UIImage(systemName: icon)
     }
     
@@ -90,7 +88,4 @@ class DaysTempTableViewCell: UITableViewCell {
             iconWeather.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -100),
         ])
     }
-    
-    
-
 }

@@ -49,7 +49,6 @@ class WeatherListViewController: UIViewController {
         collectionView.dataSource = self
         weatherSearchController.searchBar.delegate = self
         getCityWeatherCell()
-        
     }
     
     func getCityWeatherCell() {
@@ -117,6 +116,10 @@ class WeatherListViewController: UIViewController {
         isOffDelete = !isOffDelete
         collectionView.reloadData()
     }
+    
+    @objc func tap() {
+        collectionView.endEditing(true)
+    }
 }
 
 //MARK: - Private
@@ -134,6 +137,8 @@ private extension WeatherListViewController {
         
         let getEditCitiesListButton = UIBarButtonItem(image: UIImage(systemName: "trash.circle.fill"), style: .done, target: self, action: #selector(pressTrashButton))
         navigationItem.rightBarButtonItem = getEditCitiesListButton
+        
+        
         
         cityResponceArray = Array(repeating: emptyCity, count: citiesDefaultArray.count)
         
@@ -189,7 +194,7 @@ extension WeatherListViewController: UISearchResultsUpdating {
                     switch result {
                     case let .success(responceCity):
                         self.cityNameResponceArray = []
-                        self.cityNameResponceArray.append(responceCity)
+                        self.cityNameResponceArray = [responceCity]
                         self.tableViewCityName.reloadData()
                     case let .failure(error):
                         print(error)
@@ -258,7 +263,6 @@ extension WeatherListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: CityNameTableViewCell.identifier, for: indexPath) as! CityNameTableViewCell
         if let model = cityNameResponceArray.first?[indexPath.row] {
             cell.cellConfig(model: model)

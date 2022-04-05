@@ -9,7 +9,6 @@ import UIKit
 
 class WeatherMainViewController: UIViewController {
     
-    
     var weatherModel: WeatherResponce?
     var timeZone: String?
     
@@ -131,7 +130,6 @@ class WeatherMainViewController: UIViewController {
         tableViewWeatherDaysTemp.delegate = self
         tableViewWeatherDaysTemp.dataSource = self
         reloadWeatherMainVC()
-        
     }
     
     func getTimeFor(timestamp: Int) -> String {
@@ -165,7 +163,7 @@ private extension WeatherMainViewController {
         scrollView.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubviewsForAutoLayout([weatherHumidityLabel, weatherHumidityValueLabel, cardWeatherView, collectionViewWeatherHourlyTemp, windSpeedLabel, windSpeedValueLabel, tableViewWeatherDaysTemp])
+        contentView.addSubviewsForAutoLayout([weatherHumidityLabel, weatherHumidityValueLabel, cardWeatherView, collectionViewWeatherHourlyTemp, windSpeedLabel, windSpeedValueLabel, tableViewWeatherDaysTemp])
         cardWeatherView.addSubviewsForAutoLayout([cityNameLabel, weatherInfoLabel, weatherTemperatureLabel, currentTimeLabel])
         
         title = NSLocalizedString("details", comment: "")
@@ -174,6 +172,7 @@ private extension WeatherMainViewController {
         view.backgroundColor = .systemGray5
         scrollView.backgroundColor = .systemGray5
         scrollView.bounces = true
+        scrollView.showsVerticalScrollIndicator = false
         
         cardWeatherView.backgroundColor = .white
         cardWeatherView.layer.cornerRadius = 25

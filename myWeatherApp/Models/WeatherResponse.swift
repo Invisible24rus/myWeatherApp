@@ -71,6 +71,6 @@ struct Weather: Decodable {
     enum CodingKeys: String, CodingKey {
         case weatherDescription = "description"
         case icon
-       }
+    }
 }
 

@@ -56,15 +56,11 @@ class NetworkService {
             "x-rapidapi-host": "spott.p.rapidapi.com",
             "x-rapidapi-key": "86ee56f721msh8a4c597f0c723e3p11d10ajsnb182c629daf7"
         ]
-        
-        let str = cityNameString
-        let data = Data(str.utf8)
-        let hexString = data.map{ String(format:"%02x", $0) }.joined(separator: "%")
 
-        guard let url = NSURL(string: "https://spott.p.rapidapi.com/places/autocomplete?limit=10&skip=0&language=%20ru&country=RU,US&q=%\(hexString)&type=CITY") else { return }
-        
+        guard let hexString = cityNameString.addingPercentEncoding(withAllowedCharacters: .newlines) else { return }
+        guard let url = NSURL(string: "https://spott.p.rapidapi.com/places/autocomplete?limit=20&language=%20ru&country=RU%2CUS%2CUA&q=\(hexString)&type=CITY") else { return }
+        print(url)
         let request = NSMutableURLRequest(url: url as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-        
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
 
