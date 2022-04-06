@@ -55,7 +55,7 @@ class WeatherMainViewController: UIViewController {
     private let weatherHumidityLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("humidity", comment: "")
-        label.font = UIFont.boldSystemFont(ofSize: 24.0)
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.textColor = .black
         label.numberOfLines = 2
         label.sizeToFit()
@@ -65,7 +65,7 @@ class WeatherMainViewController: UIViewController {
     private var weatherHumidityValueLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = UIFont.boldSystemFont(ofSize: 24.0)
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.textColor = .black
         return label
     }()
@@ -73,7 +73,7 @@ class WeatherMainViewController: UIViewController {
     private var windSpeedLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("windSpeed", comment: "")
-        label.font = UIFont.boldSystemFont(ofSize: 24.0)
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.textColor = .black
         label.numberOfLines = 2
         label.sizeToFit()
@@ -83,7 +83,7 @@ class WeatherMainViewController: UIViewController {
     private var windSpeedValueLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = UIFont.boldSystemFont(ofSize: 24.0)
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
         label.textColor = .black
         return label
     }()
